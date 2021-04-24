@@ -2,18 +2,28 @@
 <html>
   <head>
     <meta charset="UTF-8" />
-	<meta name="authors" content="Tom Nachman and Asaf Salomon">
-	<meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
-	<title>PACMAN</title>
-	<!--Links -->
-	<link rel="shortcut icon" type="image/png" href="assets/pacmanIcon.png"/>
-	<link rel="stylesheet" type="text/css" href="./styles/style.css" />
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300">
-	<!-- Scripts -->
-	<script  type="text/javascript" src="./scripts/jquery-3.4.1.slim.min.js"></script>
-    <script type="text/javascript" src="./scripts/app.js"></script>
-    <script type="text/javascript" src="./scripts/menu.js"></script>
+    <meta name="authors" content="Tom Nachman and Asaf Salomon" />
+    <meta
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+      name="viewport"
+    />
+    <title>PACMAN</title>
+    <!--Links -->
+    <link rel="shortcut icon" type="image/png" href="assets/pacmanIcon.png" />
+    <link rel="stylesheet" type="text/css" href="./styles/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Roboto:300"
+    />
+    <!-- Scripts -->
+    <script
+      type="text/javascript"
+      src="./scripts/jquery-3.4.1.slim.min.js"
+    ></script>
   </head>
 
   <body>
@@ -32,42 +42,58 @@
     </div>
 
     <!-- Menu (Changing) -->
-	<div id="menu-nav">
-		<div id="navigation-bar">
-			<ul>
-				<li><a href="#"><i class="fa fa-home"></i><span> Welcome</span></a></li>
-				<li><a href="#"><i class="fas fa-sign-in-alt"></i><span> Login</span></a></li>
-				<li><a href="#"><i class="fa fa-user"></i><span> register</span></a></li>
-				<li><a href="#"><i class="fas fa-ghost"></i><span> Play</span></a></li>
-				<li><a href="#"><i class="fas fa-sign-out-alt"></i><span> Logout</span></a></li>
-				<li><a href="#"><i class="fas fa-address-card"></i> <span> About</span></a></li>
-			</ul>
-		</div> 
-  	</div>
-    <!--<ul>
-      <li>
-        <a href="#Welcome" onclick="switch_content('Welcome_content')"
-          >Welcome</a
-        >
-      </li>
-      <li><a class="active" href="#about">About</a></li>
-    </ul> -->
+    <div id="menu-nav">
+      <div id="navigation-bar">
+        <ul>
+          <li id="Welcome_nav">
+            <a href="#"><i class="fa fa-home"></i><span> Welcome</span></a>
+          </li>
+          <li id="Login_nav">
+            <a href="#"
+              ><i class="fas fa-sign-in-alt"></i><span> Login</span></a
+            >
+          </li>
+          <li id="Register_nav">
+            <a href="#"><i class="fa fa-user"></i><span> Register</span></a>
+          </li>
+          <li id="Play_nav">
+            <a href="#"><i class="fas fa-ghost"></i><span> Play</span></a>
+          </li>
+          <li id="Logout_nav">
+            <a href="#"
+              ><i class="fas fa-sign-out-alt"></i><span> Logout</span></a
+            >
+          </li>
+          <li id="About_nav">
+            <a href="#"
+              ><i class="fas fa-address-card"></i> <span> About</span></a
+            >
+          </li>
+        </ul>
+      </div>
+    </div>
 
     <!--Content -->
     <div id="Welcome_content" class="content">
       <div class="container">
         <h1>welcome</h1>
-        <button onclick="switch_content('Login_content')">Login</button>
-        <button onclick="switch_content('Register_content')">Register</button>
+        <img
+          id="welcome_gif"
+          src="assets/PacmanMoving.gif"
+          alt="wlgif"
+          style="width: 23%"
+        />
+        <button id="Login_btn" type="button">Login</button>
+        <button id="Register_btn" type="button">Register</button>
+        <button id="Play_btn" type="button">Play</button>
       </div>
     </div>
-	
 
-    <div id="Register_content" style="display: none" class="content">
+    <div id="Register_content" class="content" style="display: none">
       <p>Register</p>
     </div>
 
-    <div id="Login_content" style="display: none" class="content">
+    <div id="Login_content" class="content" style="display: none">
       <div class="container-form">
         <form method="post">
           <div class="container">
@@ -99,7 +125,7 @@
       </div>
     </div>
 
-    <div id="Game_content" style="display: none" class="content">
+    <div id="Game_content" class="content" style="display: none">
       <div id="score">
         <label for="lblScore">SCORE:</label>
         <input id="lblScore" type="text" />
@@ -115,11 +141,14 @@
 
     <!-- Footer -->
     <footer>
-		<p>Web Development Enviourmnets</p>
-		<p>
-		  <a href="mailto:nachmant@post.bgu.ac.il">nachmant@post.bgu.ac.il</a>
-		  <a href="mailto:asafsalo@post.bgu.ac.il">asafsalo@post.bgu.ac.il</a>
-		</p>
-	  </footer>
+      <p>Web Development Enviourmnets</p>
+      <p>
+        <a href="mailto:nachmant@post.bgu.ac.il">nachmant@post.bgu.ac.il</a>
+        <a href="mailto:asafsalo@post.bgu.ac.il">asafsalo@post.bgu.ac.il</a>
+      </p>
+    </footer>
+
+    <script type="text/javascript" src="./scripts/app.js"></script>
+    <script type="text/javascript" src="./scripts/menu.js"></script>
   </body>
 </html>

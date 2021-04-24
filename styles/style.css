@@ -6,9 +6,20 @@ body {
   background: url("https://www.classicgaming.cc/classics/pac-man/images/web/seamless-background-pac-man-chalk-pattern-blue.jpg");
   margin-bottom: 60px;
 }*/
-body{
-  background-color: #A8A8A8;
-  font-family: 'Roboto', sans-serif;
+
+@font-face {
+  font-family: "MyWebFont";
+  src: url("/assets//emulogic.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "crackFont";
+  src: url("/assets//CrackMan.TTF");
+}
+
+body {
+  background-color: #a8a8a8;
+  font-family: "Roboto", sans-serif;
 }
 
 /*Header styles */
@@ -24,13 +35,13 @@ body{
   height: 10vh;
 }
 
-
 .devs-credit {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: last baseline;
   align-content: center;
+  font-family: "MyWebFont", monospace;
 }
 
 h4 {
@@ -41,41 +52,53 @@ h4 {
 /*Nav Bar Styles */
 #menu-nav {
   max-width: auto;
-  height: 10vh;
-  margin:  0%;
+  display: flex;
+  flex-direction: column;
+  height: 6vh;
+  margin: 0%;
+  justify-content: center;
+  /* align-content: center; */
+  /* align-items: center; */
   background-color: #ecf0f1;
-  /* border-radius: 1px; */
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-  border: 3px solid rgb(39, 235, 21);
-
+  /* border: 3px solid rgb(39, 235, 21); */
 }
- 
+
 #navigation-bar ul {
+  display: flex;
+  flex-direction: row;
+  padding: 0%;
+  margin: 0%;
+  height: 100%;
   border-radius: 0;
-  overflow: hidden; 
-  border: 3px solid rgb(37, 81, 202);
+  overflow: auto;
+  justify-content: space-evenly;
+  /* border: 3px solid rgb(37, 81, 202); */
 }
 #navigation-bar li {
   float: left;
   width: 15%;
-  border: 3px solid rgb(231, 15, 15);
+  height: 80%;
+  padding: 0%;
+  margin: 0%;
+  font-size: 1vmin;
+  /* border: 3px solid rgb(231, 15, 15); */
 }
 #navigation-bar li:hover a::before {
   right: 0;
   left: 0;
 }
 #navigation-bar a {
+  font-size: calc(2px + 2.5vmin);
   color: #848484;
-  font-size: 20px;
   text-decoration: none;
   text-align: center;
-  padding: 20px 0;
   display: block;
   position: relative;
   transition: all 0.3s ease;
 }
 #navigation-bar a:hover {
-  color: #490a03;
+  color: #454545;
 }
 #navigation-bar a::before {
   content: "";
@@ -85,17 +108,16 @@ h4 {
   left: 50%;
   bottom: 0;
   height: 2px;
-  background-color: #e74c3c;
+  background-color: #484848;
 }
 #navigation-bar a:hover::before {
   right: 0;
   left: 0;
 }
- 
-li {
- list-style: none;
-}
 
+li {
+  list-style: none;
+}
 
 /* --- Login Style */
 
@@ -136,13 +158,14 @@ input[type="password"] {
 
 /* Set a style for all buttons */
 button {
-  background-color: #4caf50;
+  background-color: #6a776d;
   color: white;
   padding: 14px 20px;
   margin: 8px 0;
   border: none;
   cursor: pointer;
   width: 20%;
+  border-radius: 3%;
 }
 
 /* Add a hover effect for buttons */
@@ -158,8 +181,6 @@ button:hover {
 img.avatar {
   width: 15%;
 }
-
-
 
 /* The "Forgot password" text */
 span.psw {
@@ -181,10 +202,15 @@ img#navbar_pacman {
   width: 50px;
   height: auto;
 }
+
 /* Content */
 .content {
-  height: 75vh;
+  height: 76vh;
+  border: 1px solid #154a40;
+
+  font-family: "crackFont";
 }
+
 /* Footer */
 footer {
   text-align: center;
@@ -196,6 +222,6 @@ footer {
   background: #154a40;
   color: white;
   height: 5vh;
-  margin: 0%;
+  margin-bottom: 0%;
   padding: 0%;
 }
