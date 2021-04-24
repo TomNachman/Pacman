@@ -1,96 +1,201 @@
+/*html {
+  background: url("https://www.classicgaming.cc/classics/pac-man/images/web/seamless-background-pac-man-chalk-pattern-blue.jpg") 
+    scroll;
+}
+body {
+  background: url("https://www.classicgaming.cc/classics/pac-man/images/web/seamless-background-pac-man-chalk-pattern-blue.jpg");
+  margin-bottom: 60px;
+}*/
+body{
+  background-color: #A8A8A8;
+  font-family: 'Roboto', sans-serif;
+}
+
 /*Header styles */
 .header {
-    padding: 20px;
-    text-align: left;
-    background: #082b24;
-    color: white;
-    font-size: 15px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  text-align: left;
+  background: #082b24;
+  color: white;
+  font-size: 11px;
+  height: 10vh;
 }
+
+
+.devs-credit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: last baseline;
+  align-content: center;
+}
+
+h4 {
+  margin: 0%;
+  padding: 0%;
+}
+
 /*Nav Bar Styles */
-ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: #333;
-  }
-  
+#menu-nav {
+  max-width: auto;
+  height: 10vh;
+  margin:  0%;
+  background-color: #ecf0f1;
+  /* border-radius: 1px; */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  border: 3px solid rgb(39, 235, 21);
+
+}
+ 
+#navigation-bar ul {
+  border-radius: 0;
+  overflow: hidden; 
+  border: 3px solid rgb(37, 81, 202);
+}
+#navigation-bar li {
+  float: left;
+  width: 15%;
+  border: 3px solid rgb(231, 15, 15);
+}
+#navigation-bar li:hover a::before {
+  right: 0;
+  left: 0;
+}
+#navigation-bar a {
+  color: #848484;
+  font-size: 20px;
+  text-decoration: none;
+  text-align: center;
+  padding: 20px 0;
+  display: block;
+  position: relative;
+  transition: all 0.3s ease;
+}
+#navigation-bar a:hover {
+  color: #490a03;
+}
+#navigation-bar a::before {
+  content: "";
+  transition: all 0.4s ease-in-out;
+  position: absolute;
+  right: 50%;
+  left: 50%;
+  bottom: 0;
+  height: 2px;
+  background-color: #e74c3c;
+}
+#navigation-bar a:hover::before {
+  right: 0;
+  left: 0;
+}
+ 
 li {
-    float: left;
+ list-style: none;
 }
 
-li a {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-}
-
-/* Change the link color to #111 (black) on hover */
-li a:hover {
-    background-color: #111;
-}
 
 /* --- Login Style */
- /* Bordered form */
- form {
-    border: 3px solid #f1f1f1;
-  }
-  
-  /* Full-width inputs */
-  input[type=text], input[type=password] {
-    width: 60%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: block;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-  }
-  
-  /* Set a style for all buttons */
-  button {
-    background-color: #4CAF50;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    cursor: pointer;
-    width: auto;
-  }
-  
-  /* Add a hover effect for buttons */
-  button:hover {
-    opacity: 0.8;
-  }
-    
-  /* Center the avatar image inside this container */
-  .imgcontainer {
-    text-align: center;
-    margin: 24px 0 12px 0;
-  }
-  
-  /* Avatar image */
-  img.avatar {
-    width: 40%;
-    border-radius: 50%;
-  }
-  
-  /* Add padding to containers */
-  .container {
-    padding: 16px;
-  }
-  
-  /* The "Forgot password" text */
+
+.container-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /* border: 3px solid rgb(12, 59, 231); */
+}
+
+/* Bordered form */
+form {
+  margin: 1vmin;
+  width: 40vw;
+  /* border: 3px solid rgb(231, 180, 12); */
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2%;
+  /* border: 3px solid rgb(231, 12, 140); */
+}
+
+/* Full-width inputs */
+input[type="text"],
+input[type="password"] {
+  width: 80%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+/* Set a style for all buttons */
+button {
+  background-color: #4caf50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 20%;
+}
+
+/* Add a hover effect for buttons */
+button:hover {
+  opacity: 0.8;
+}
+
+/* Center the avatar image inside this container */
+.imgcontainer {
+  text-align: center;
+  margin: 24px 0 12px 0;
+}
+img.avatar {
+  width: 15%;
+}
+
+
+
+/* The "Forgot password" text */
+span.psw {
+  float: right;
+  padding-top: 16px;
+}
+
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 300px) {
   span.psw {
-    float: right;
-    padding-top: 16px;
+    display: block;
+    float: none;
   }
-  
-  /* Change styles for span and cancel button on extra small screens */
-  @media screen and (max-width: 300px) {
-    span.psw {
-      display: block;
-      float: none;
-    }
-  } 
+}
+
+img#navbar_pacman {
+  margin-top: 10px;
+  display: block;
+  width: 50px;
+  height: auto;
+}
+/* Content */
+.content {
+  height: 75vh;
+}
+/* Footer */
+footer {
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  font-stretch: normal;
+  background: #154a40;
+  color: white;
+  height: 5vh;
+  margin: 0%;
+  padding: 0%;
+}

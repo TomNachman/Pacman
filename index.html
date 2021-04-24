@@ -1,70 +1,125 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="UTF-8">
-		<script src="./jquery-3.4.1.slim.min.js"></script>
-		<link rel="stylesheet" type="text/css" href="./styles/style.css" />
-		<script type="text/javascript" src="./scripts/app.js"></script>
-		<script type="text/javascript" src="./scripts/menu.js"></script>
+  <head>
+    <meta charset="UTF-8" />
+	<meta name="authors" content="Tom Nachman and Asaf Salomon">
+	<meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+	<title>PACMAN</title>
+	<!--Links -->
+	<link rel="shortcut icon" type="image/png" href="assets/pacmanIcon.png"/>
+	<link rel="stylesheet" type="text/css" href="./styles/style.css" />
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300">
+	<!-- Scripts -->
+	<script  type="text/javascript" src="./scripts/jquery-3.4.1.slim.min.js"></script>
+    <script type="text/javascript" src="./scripts/app.js"></script>
+    <script type="text/javascript" src="./scripts/menu.js"></script>
+  </head>
 
-	</head>
+  <body>
+    <!-- Header -->
+    <div class="header">
+      <img
+        src="./assets/pacmanIcon.png"
+        style="width: 4%"
+        class="mainPacmanIcon"
+      />
+      <h1>Pacman Game</h1>
+      <div class="devs-credit">
+        <h4>Tom Nachman</h4>
+        <h4>Asaf Salomon</h4>
+      </div>
+    </div>
 
-	<body>
-		<!-- Header -->
-		<div class="header">
-			<h1>PacMan</h1>
-			<!-- Add icon-->
-			<h3 style="float:right">Tom Nachman - 204691695</h3>
-			<h3 style="float:right">Asaf Salomon - 204169155</h3>
-		</div>
-		<!-- Menu (Changing) --> 
-		<ul>
-			<li><a href="#Welcome" onclick="switch_content('Welcome_content')">Welcome</a></li>
-			<li><a class="active" href="#about">About</a></li>
-		</ul> 
+    <!-- Menu (Changing) -->
+	<div id="menu-nav">
+		<div id="navigation-bar">
+			<ul>
+				<li><a href="#"><i class="fa fa-home"></i><span> Welcome</span></a></li>
+				<li><a href="#"><i class="fas fa-sign-in-alt"></i><span> Login</span></a></li>
+				<li><a href="#"><i class="fa fa-user"></i><span> register</span></a></li>
+				<li><a href="#"><i class="fas fa-ghost"></i><span> Play</span></a></li>
+				<li><a href="#"><i class="fas fa-sign-out-alt"></i><span> Logout</span></a></li>
+				<li><a href="#"><i class="fas fa-address-card"></i> <span> About</span></a></li>
+			</ul>
+		</div> 
+  	</div>
+    <!--<ul>
+      <li>
+        <a href="#Welcome" onclick="switch_content('Welcome_content')"
+          >Welcome</a
+        >
+      </li>
+      <li><a class="active" href="#about">About</a></li>
+    </ul> -->
 
-		<!--Content -->
-		
-		<div id="Welcome_content">
-			<p> welcome</p>
-			<button onclick="switch_content('Login_content')">Login</button>
-			<button onclick="switch_content('Register_content')">Register</button>
+    <!--Content -->
+    <div id="Welcome_content" class="content">
+      <div class="container">
+        <h1>welcome</h1>
+        <button onclick="switch_content('Login_content')">Login</button>
+        <button onclick="switch_content('Register_content')">Register</button>
+      </div>
+    </div>
+	
 
-		</div>
-		<div id="Register_content" style="display:none">
-			<p>Register</p>
-		</div>
-		<div id="Login_content" style="display:none">
-			<form method="post">
-				<div class="imgcontainer">
-				  <img src="img_avatar2.png" alt="Avatar" class="avatar">
-				</div>
-			  
-				<div class="container">
-				  <label for="uname"><b>Username</b></label>
-				  <input type="text" placeholder="Enter Username" name="uname" required>
-			  
-				  <label for="psw"><b>Password</b></label>
-				  <input type="password" placeholder="Enter Password" name="psw" required>
-			  
-				  <button type="submit">Login</button>
-				</div>
-			  </form> 
-		</div>
-		<div id="Game_content" >
-			<div id="score">
-				<label for="lblScore">SCORE:</label>
-				<input id="lblScore" type="text" />
-			</div>
-			<div id="time"> 
-				<label for="lblTime">TIME:</label>
-				<input id="lblTime" type="text" />
-			</div>
-			<div id="game">
-				<canvas id="canvas" height="600" width="600"></canvas>
-			</div>
-		</div>
+    <div id="Register_content" style="display: none" class="content">
+      <p>Register</p>
+    </div>
 
-		<!-- Footer -->
-	</body>
+    <div id="Login_content" style="display: none" class="content">
+      <div class="container-form">
+        <form method="post">
+          <div class="container">
+            <h1>Login</h1>
+
+            <div class="imgcontainer">
+              <img src="./assets/loginIcon.png" alt="Avatar" class="avatar" />
+            </div>
+
+            <label for="uname"><b>Username</b></label>
+            <input
+              type="text"
+              placeholder="Enter Username"
+              name="uname"
+              required
+            />
+
+            <label for="psw"><b>Password</b></label>
+            <input
+              type="password"
+              placeholder="Enter Password"
+              name="psw"
+              required
+            />
+
+            <button type="submit">Login</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div id="Game_content" style="display: none" class="content">
+      <div id="score">
+        <label for="lblScore">SCORE:</label>
+        <input id="lblScore" type="text" />
+      </div>
+      <div id="time">
+        <label for="lblTime">TIME:</label>
+        <input id="lblTime" type="text" />
+      </div>
+      <div id="game">
+        <canvas id="canvas" height="600" width="600"></canvas>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+		<p>Web Development Enviourmnets</p>
+		<p>
+		  <a href="mailto:nachmant@post.bgu.ac.il">nachmant@post.bgu.ac.il</a>
+		  <a href="mailto:asafsalo@post.bgu.ac.il">asafsalo@post.bgu.ac.il</a>
+		</p>
+	  </footer>
+  </body>
 </html>
