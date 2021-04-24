@@ -30,68 +30,95 @@
     </div>
 
     <!-- Menu (Changing) -->
-	<div id="menu-nav">
-		<div id="navigation-bar">
-			<ul>
-				<li id="Welcome_nav"><a href="#"><i class="fa fa-home"></i><span> Welcome</span></a></li>
-				<li id="Login_nav"><a href="#"><i class="fas fa-sign-in-alt"></i><span> Login</span></a></li>
-				<li id="Register_nav"><a href="#"><i class="fa fa-user"></i><span> Register</span></a></li>
-				<li id="Play_nav"><a href="#"><i class="fas fa-ghost"></i><span> Play</span></a></li>
-				<li id="Logout_nav"><a href="#"><i class="fas fa-sign-out-alt"></i><span> Logout</span></a></li>
-				<li id="About_nav"><a href="#"><i class="fas fa-address-card"></i> <span> About</span></a></li>
-			</ul>
-		</div> 
-  	</div>
+    <div id="menu-nav">
+      <div id="navigation-bar">
+        <ul>
+          <li id="Welcome_nav">
+            <a href="#"><i class="fa fa-home"></i><span> Welcome</span></a>
+          </li>
+          <li id="Login_nav">
+            <a href="#"
+              ><i class="fas fa-sign-in-alt"></i><span> Login</span></a
+            >
+          </li>
+          <li id="Register_nav">
+            <a href="#"><i class="fa fa-user"></i><span> Register</span></a>
+          </li>
+          <li id="Play_nav">
+            <a href="#"><i class="fas fa-ghost"></i><span> Play</span></a>
+          </li>
+          <li id="Logout_nav">
+            <a href="#"
+              ><i class="fas fa-sign-out-alt"></i><span> Logout</span></a
+            >
+          </li>
+          <li id="About_nav">
+            <a href="#"
+              ><i class="fas fa-address-card"></i> <span> About</span></a
+            >
+          </li>
+        </ul>
+      </div>
+    </div>
 
     <!--Content -->
     <div id="Welcome_content" class="content">
       <div class="container">
         <h1>welcome</h1>
-		<img id="welcome_gif" src="assets/PacmanMoving.gif" alt="wlgif" />
+        <img
+          id="welcome_gif"
+          src="assets/PacmanMoving.gif"
+          alt="wlgif"
+          style="width: 23%"
+        />
         <button id="Login_btn" type="button">Login</button>
         <button id="Register_btn" type="button">Register</button>
-		<button id="Play_btn" type="button">Play</button>
+        <button id="Play_btn" type="button">Play</button>
       </div>
     </div>
-	
 
-    <div id="Register_content" style="display: none" class="content">
+    <div id="Register_content" class="content" style="display: none">
       <p>Register</p>
     </div>
 
-    <div id="Login_content" style="display: none" class="content">
+    <div id="Login_content" class="content" style="display: none">
       <div class="container-form">
-        <form method="post">
+        <form>
           <div class="container">
             <h1>Login</h1>
 
             <div class="imgcontainer">
               <img src="./assets/loginIcon.png" alt="Avatar" class="avatar" />
             </div>
-
             <label for="uname"><b>Username</b></label>
             <input
               type="text"
               placeholder="Enter Username"
               name="uname"
-              required
+			  id="login_username"
+			  name="login_username"
+              required autofocus
             />
-
             <label for="psw"><b>Password</b></label>
             <input
               type="password"
               placeholder="Enter Password"
               name="psw"
-              required
+			  id="login_password"
+			  name="login_password"
+              required autofocus
             />
+			<div class="alert alert-warning" id="alert_login" role="alert">
+				<strong>Warning<br /></strong> <span id="alert_details_login"></span>
+			</div>
 
-            <button id="sign_in" type="submit">Login</button>
+            <button id="sign_in_btn" type="button">Login</button>
           </div>
         </form>
       </div>
     </div>
 
-    <div id="Game_content" style="display: none" class="content">
+    <div id="Game_content" class="content" style="display: none">
       <div id="score">
         <label for="lblScore">SCORE:</label>
         <input id="lblScore" type="text" />
@@ -107,13 +134,14 @@
 
     <!-- Footer -->
     <footer>
-		<p>Web Development Enviourmnets</p>
-		<p>
-		  <a href="mailto:nachmant@post.bgu.ac.il">nachmant@post.bgu.ac.il</a>
-		  <a href="mailto:asafsalo@post.bgu.ac.il">asafsalo@post.bgu.ac.il</a>
-		</p>
-	  </footer>
-	  <script type="text/javascript" src="./scripts/app.js"></script>
-	  <script type="text/javascript" src="./scripts/menu.js"></script>
+      <p>Web Development Enviourmnets</p>
+      <p>
+        <a href="mailto:nachmant@post.bgu.ac.il">nachmant@post.bgu.ac.il</a>
+        <a href="mailto:asafsalo@post.bgu.ac.il">asafsalo@post.bgu.ac.il</a>
+      </p>
+    </footer>
+
+    <script type="text/javascript" src="./scripts/app.js"></script>
+    <script type="text/javascript" src="./scripts/menu.js"></script>
   </body>
 </html>
