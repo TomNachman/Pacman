@@ -4,10 +4,10 @@ var logged_user = false;
 
 $(document).ready(function(){
   $("#Logout_nav").hide();
-  $("#Welcome_content").show();
-  $("#Game_content").hide();
-  //$("#Play_btn").hide();
-  //$("#Play_nav").hide();
+  $("#Welcome_content").hide();
+  $("#Game_content").show();
+  $("#Play_btn").hide();
+  $("#Play_nav").hide();
   $("#Logout_nav").hide();
   $("#Login_content").hide();
   $("#Register_content").hide();
