@@ -13,6 +13,7 @@ $(document).ready(function(){
   $("#Register_content").hide();
   $("#alert_login").hide();
   $("#alert_register").hide();
+  //$("#About_modal").hide();
   // init first user
   const first_uesr = {
     firstname : "Pac",
@@ -66,7 +67,6 @@ $(document).ready(function(){
      $("#Logout_nav").show();
     }
   });
-
 });
 
 // -------- Content change 
@@ -206,8 +206,10 @@ function hide_everyhing() {
   $("#Game_content").hide();
   $("#Login_content").hide();
   $("#Register_content").hide();
+  //$("#About_modal").hide();
 };
 
+// -----date picker box
 $(function() {
 
   //populate our years select box
@@ -243,4 +245,21 @@ function updateNumberOfDays(){
 //helper function
 function daysInMonth(month, year) {
   return new Date(year, month, 0).getDate();
+}
+
+// --- modal
+let modalBtn = document.getElementById("About_nav");
+let modal = document.querySelector(".modal");
+let closeBtn = document.querySelector(".close-btn");
+
+modalBtn.onclick = function(){
+  modal.style.display = "block"
+};
+closeBtn.onclick = function(){
+  modal.style.display = "none"
+};
+window.onclick = function(e){
+  if(e.target == modal){
+    modal.style.display = "none"
+  }
 }
