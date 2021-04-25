@@ -12,6 +12,7 @@ $(document).ready(function(){
   $("#Login_content").hide();
   $("#Register_content").hide();
   $("#alert_login").hide();
+  $("#alert_register").hide();
   // init first user
   const first_uesr = {
     firstname : "Pac",
@@ -68,27 +69,119 @@ $(document).ready(function(){
 
 });
 
-// --- Content change 
+// -------- Content change 
 $("#Welcome_nav").click(function(){
-  console.log("welcome");
   hide_everyhing();
   $("#Welcome_content").show();
 });
-
+// -- login
 $("#Login_nav, #Login_btn").click(function() {
-    console.log("Login");
     hide_everyhing();
     $("#Login_content").show();
 });
-
+// -- register
 $("#Register_nav, #Register_btn").click(function() {
   console.log("Register");
   hide_everyhing();
   $("#Register_content").show();
 });
+$("#submit_register").click(function(){
+  console.log("register");
+  var valid = true;
+  var username = $('#register_username').val();
+  var firstname = $('#register_firstname').val();
+  var lastname = $('#register_lastname').val();
+  var email = $('#register_email').val();
+  var password = $('#register_password').val();
+  var birthday = $('#days').val() + '/' + $('#months').val() + '/' + $('#years').val();
+  console.log(birthday);
+  var msg = "";
+  $("#alert_details_register").empty();
+  $("#alert_register").hide();
+
+  if(firstname !== ""){
+    if (/[^a-zA-Z]/.test(firstname)){
+      valid = false;
+      msg += "firstname cant contain numbers <br >";
+      //$('#register_firstname').css("border","red");
+    }
+  }else {
+    valid = false;
+    msg += "firstname cant be empty <br >";
+  }
+
+  if(lastname !== ""){
+    if (/[^a-zA-Z]/.test(lastname)){
+      valid = false;
+      msg += "lastname cant contain numbers <br >";
+    }
+  } else {
+    valid=false;
+    msg += "lastname cant be empty <br >";
+  }
+
+  if(username !== ""){
+    users.forEach(user => {
+      if (user.username === username){
+        valid = false;
+        msg += "username already exsits, please choose new username <br >";
+      }
+    });
+  } else {
+    valid=false;
+    msg += "username cant be empty <br >";
+  }
+
+  if(email !== ""){
+    var mailformat = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if (!email.match(mailformat)){
+      valid = false;
+      msg += "Incorrect Email format, Please try again <br >";
+    }
+  } else {
+    valid=false;
+    msg += "Email cant be empty <br >";
+  }
+  
+  if(password !== ""){
+    if (password.length >= 6){
+      var passFormat = /(?=.*\d)(?=.*[A-Za-z])/;
+      if (!password.match(passFormat)){
+        valid = false;
+        msg += "Incorrect Password format, password must contain at least 1 lettet and 1 number <br >";
+      }
+    }else{
+      valid=false;
+      msg += "password must contain at least 6 characters <br >";
+    }
+  } else {
+    valid=false;
+    msg += "password cant be empty <br >";
+  }
+
+  if (!valid){
+    $("#alert_details_register").empty();
+    $("#alert_details_register").html(msg);
+    $("#alert_register").show();
+  }
+  //correct register form
+  else{
+    const new_preson = {
+      firstname,
+      lastname,
+      username,
+      password,
+      email,
+      birthday,
+    };
+    users.push(new_preson);
+    alert("Succesfuly registerd")
+    $("#Register_content").hide();
+    $("#Login_content").show();
+  }
+});
 
 $("#Logout_nav, #Logout_btn").click(function() {
-  console.log("Logout");
   hide_everyhing();
   active_user = "";
   logged_user = false;
@@ -114,3 +207,40 @@ function hide_everyhing() {
   $("#Login_content").hide();
   $("#Register_content").hide();
 };
+
+$(function() {
+
+  //populate our years select box
+  for (i = new Date().getFullYear(); i > 1940; i--){
+      $('#years').append($('<option />').val(i).html(i));
+  }
+  //populate our months select box
+  for (i = 1; i < 13; i++){
+      $('#months').append($('<option />').val(i).html(i));
+  }
+  //populate our Days select box
+  updateNumberOfDays(); 
+
+  //"listen" for change events
+  $('#years, #months').change(function(){
+      updateNumberOfDays(); 
+  });
+
+});
+
+//function to update the days based on the current values of month and year
+function updateNumberOfDays(){
+  $('#days').html('');
+  month = $('#months').val();
+  year = $('#years').val();
+  days = daysInMonth(month, year);
+
+  for(i=1; i < days+1 ; i++){
+    $('#days').append($('<option />').val(i).html(i));
+  }
+}
+
+//helper function
+function daysInMonth(month, year) {
+  return new Date(year, month, 0).getDate();
+}

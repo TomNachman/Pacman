@@ -78,7 +78,80 @@
     </div>
 
     <div id="Register_content" class="content" style="display: none">
-      <p>Register</p>
+      <div class="container-form">
+        <form>
+          <div class="container">
+            <h1>Register</h1>
+
+            <div class="inline">
+              <div class="above">
+                <label for="uname"><b>Username</b></label>
+                <input id="register_username" type="text" placeholder="Enter Username" name="uname" required autofocus />
+              </div>
+
+              <div class="above">
+                <label for="firstname"><b>First Name</b></label>
+                <input
+				  id="register_firstname"
+                  type="text"
+                  placeholder="Enter first name"
+                  name="firstname"
+				  required
+				  autofocus
+                />
+              </div>
+			  <div class="above">
+                <label for="lastname"><b>Last Name</b></label>
+                <input
+				  id="register_lastname"
+                  type="text"
+                  placeholder="Enter last name"
+                  name="lastname"
+				  required
+				  autofocus
+                />
+              </div>
+            </div>
+            <div class="inline">
+              <div class="above">
+                <label for="email"><b>Email</b></label>
+                <input id="register_email" type="text" placeholder="Enter email" name="email" required autofocus/>
+              </div>
+
+              <div class="above">
+                <label for="psw"><b>Password</b></label>
+                <input
+                  type="password"
+                  placeholder="Enter Password"
+                  name="psw"
+				  id="register_password"
+				  required
+				  autofocus
+                />
+              </div>
+            </div>
+
+            <div class="above">
+              <label for="birthday"><b>Date Of Birth</b></label>
+              <div class="inline">
+                <select id="days" required></select>
+                <select id="months" required></select>
+                <select id="years" required></select>
+              </div>
+            </div>
+
+			<div class="alert" id="alert_register" role="alert">
+				<strong>Warning<br /></strong>
+				<span id="alert_details_register"></span>
+			</div>
+
+            <div class="inline button">
+              <button id="submit_register" type="button">Register</button>
+              <button type="reset">Reset</button>
+            </div>
+          </div>
+        </form>
+      </div>
     </div>
 
     <div id="Login_content" class="content" style="display: none">
@@ -94,23 +167,27 @@
             <input
               type="text"
               placeholder="Enter Username"
+
               name="uname"
-			  id="login_username"
-			  name="login_username"
-              required autofocus
+              id="login_username"
+              name="login_username"
+              required
+              autofocus
             />
             <label for="psw"><b>Password</b></label>
             <input
               type="password"
               placeholder="Enter Password"
               name="psw"
-			  id="login_password"
-			  name="login_password"
-              required autofocus
+              id="login_password"
+              name="login_password"
+              required
+              autofocus
             />
-			<div class="alert alert-warning" id="alert_login" role="alert">
-				<strong>Warning<br /></strong> <span id="alert_details_login"></span>
-			</div>
+            <div class="alert" id="alert_login" role="alert">
+              <strong>Warning<br /></strong>
+              <span id="alert_details_login"></span>
+            </div>
 
             <button id="sign_in_btn" type="button">Login</button>
           </div>
@@ -118,17 +195,27 @@
       </div>
     </div>
 
-    <div id="Game_content" class="content" style="display: none">
-      <div id="score">
+    <div id="Game_content" class="content content-game" style="display: none">
+      <div id="score" class="above" style="margin: 0%; padding: 0%; width: 10%">
         <label for="lblScore">SCORE:</label>
-        <input id="lblScore" type="text" />
+        <input
+          id="lblScore"
+          type="text"
+          style="width: 90%; text-align: center"
+        />
       </div>
-      <div id="time">
+
+      <div id="game" class="game-container">
+        <canvas id="canvas"></canvas>
+      </div>
+
+      <div id="time" class="above" style="margin: 0%; padding: 0%; width: 10%">
         <label for="lblTime">TIME:</label>
-        <input id="lblTime" type="text" />
-      </div>
-      <div id="game">
-        <canvas id="canvas" height="600" width="600"></canvas>
+        <input
+          id="lblTime"
+          type="text"
+          style="width: 90%; text-align: center"
+        />
       </div>
     </div>
 
