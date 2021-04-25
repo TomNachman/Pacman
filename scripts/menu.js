@@ -63,7 +63,6 @@ $(document).ready(function(){
      $("#Register_nav").hide();
      $("#Register_btn").hide();
      $("#Logout_nav").show();
-     console.log(active_user);
     }
   });
 
@@ -88,8 +87,23 @@ $("#Register_nav, #Register_btn").click(function() {
   $("#Register_content").show();
 });
 
+$("#Logout_nav, #Logout_btn").click(function() {
+  console.log("Logout");
+  hide_everyhing();
+  active_user = "";
+  logged_user = false;
+  $("#Welcome_content").show();
+  $("#Play_btn").hide();
+  $("#Play_nav").hide();
+  $("#Login_nav").show();
+  $("#Login_btn").show();
+  $("#Register_nav").show();
+  $("#Register_btn").show();
+  $("#Logout_nav").hide();
+});
+
 $("#Play_btn, #Play_nav").click(function(){
-  console.log("Reg");
+  console.log("Play");
   hide_everyhing();
   $("#Game_content").show();
 });
