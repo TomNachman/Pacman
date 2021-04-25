@@ -13,7 +13,6 @@ $(document).ready(function(){
   $("#Register_content").hide();
   $("#alert_login").hide();
   $("#alert_register").hide();
-  //$("#About_modal").hide();
   // init first user
   const first_uesr = {
     firstname : "Pac",
