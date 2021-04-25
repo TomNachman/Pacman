@@ -6,9 +6,16 @@ body {
   background: url("https://www.classicgaming.cc/classics/pac-man/images/web/seamless-background-pac-man-chalk-pattern-blue.jpg");
   margin-bottom: 60px;
 }*/
-body{
-  background-color: #A8A8A8;
-  font-family: 'Roboto', sans-serif;
+
+@font-face {
+  font-family: "MyWebFont";
+  src: url("emulogic.ttf");
+}
+
+body {
+  font-family: "MyWebFont", sans-serif;
+  background: url("https://www.classicgaming.cc/classics/pac-man/images/web/seamless-background-pac-man-chalk-pattern-yellow.jpg")
+    scroll;
 }
 
 /*Header styles */
@@ -23,7 +30,6 @@ body{
   font-size: 11px;
   height: 10vh;
 }
-
 
 .devs-credit {
   display: flex;
@@ -41,41 +47,51 @@ h4 {
 /*Nav Bar Styles */
 #menu-nav {
   max-width: auto;
-  height: 10vh;
-  margin:  0%;
+  display: flex;
+  flex-direction: column;
+  height: 6vh;
+  margin: 0%;
+  justify-content: center;
   background-color: #ecf0f1;
-  /* border-radius: 1px; */
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-  border: 3px solid rgb(39, 235, 21);
-
+  /* border: 3px solid rgb(39, 235, 21); */
 }
- 
+
 #navigation-bar ul {
+  display: flex;
+  flex-direction: row;
+  padding: 0%;
+  margin: 0%;
+  height: 100%;
   border-radius: 0;
-  overflow: hidden; 
-  border: 3px solid rgb(37, 81, 202);
+  overflow: auto;
+  justify-content: space-evenly;
+  /* border: 3px solid rgb(37, 81, 202); */
 }
 #navigation-bar li {
   float: left;
   width: 15%;
-  border: 3px solid rgb(231, 15, 15);
+  height: 80%;
+  padding: 0%;
+  margin: 0%;
+  font-size: 1vmin;
+  /* border: 3px solid rgb(231, 15, 15); */
 }
 #navigation-bar li:hover a::before {
   right: 0;
   left: 0;
 }
 #navigation-bar a {
+  font-size: calc(3px + 2vmin);
   color: #848484;
-  font-size: 20px;
   text-decoration: none;
   text-align: center;
-  padding: 20px 0;
   display: block;
   position: relative;
   transition: all 0.3s ease;
 }
 #navigation-bar a:hover {
-  color: #490a03;
+  color: #454545;
 }
 #navigation-bar a::before {
   content: "";
@@ -85,17 +101,16 @@ h4 {
   left: 50%;
   bottom: 0;
   height: 2px;
-  background-color: #e74c3c;
+  background-color: #484848;
 }
 #navigation-bar a:hover::before {
   right: 0;
   left: 0;
 }
- 
-li {
- list-style: none;
-}
 
+li {
+  list-style: none;
+}
 
 /* --- Login Style */
 
@@ -110,7 +125,7 @@ li {
 /* Bordered form */
 form {
   margin: 1vmin;
-  width: 40vw;
+  width: 35vw;
   /* border: 3px solid rgb(231, 180, 12); */
 }
 
@@ -136,13 +151,17 @@ input[type="password"] {
 
 /* Set a style for all buttons */
 button {
-  background-color: #4caf50;
+  background-color: #6a776d;
+  text-align: center;
   color: white;
   padding: 14px 20px;
   margin: 8px 0;
   border: none;
   cursor: pointer;
-  width: 20%;
+  width: 30%;
+  border-radius: 3%;
+  font-family: "MyWebFont", sans-serif;
+  font-size: 1.5vmin;
 }
 
 /* Add a hover effect for buttons */
@@ -159,12 +178,39 @@ img.avatar {
   width: 15%;
 }
 
-
-
 /* The "Forgot password" text */
 span.psw {
   float: right;
   padding-top: 16px;
+}
+
+.inline {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 3%;
+  width: 100%;
+  /* border: 3px solid rgb(231, 12, 140); */
+}
+
+.inline select {
+  margin: 1%;
+}
+
+.inline button {
+  margin: 1%;
+}
+
+.above {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 3%;
+  margin-left: 0%;
+  margin-right: 0%;
+  width: 100%;
+  /* border: 3px solid rgb(90, 49, 73); */
 }
 
 /* Change styles for span and cancel button on extra small screens */
@@ -181,21 +227,88 @@ img#navbar_pacman {
   width: 50px;
   height: auto;
 }
+
 /* Content */
 .content {
-  height: 75vh;
+  height: 76vh;
+  border: 1px solid #154a40;
 }
+
 /* Footer */
 footer {
   text-align: center;
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: space-between;
   font-stretch: normal;
   background: #154a40;
   color: white;
   height: 5vh;
-  margin: 0%;
-  padding: 0%;
+  margin-bottom: 0%;
+  padding-left: 1%;
+  padding-right: 1%;
+  font-size: 1.5vmin;
+}
+
+.content-game {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  align-content: center;
+  border: 3px solid rgb(255, 0, 149);
+}
+
+.game-container {
+  height: 70vmin;
+  width: 70vmin;
+  border: 5px solid rgb(106, 98, 98);
+}
+
+#canvas {
+  width: 40vmin;
+  height: 40vmin;
+}
+
+
+/* Modal - about */
+.modal {
+  display: none;
+  position: fixed; 
+  padding-top: 50px;
+  left: 0; 
+  top: 0;
+  width: 100%;
+  height: 100%; 
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.modal-content {
+  position: relative; 
+  background-color: white;
+  padding: 20px; 
+  margin: auto; 
+  width: 75%;  
+  -webkit-animation-name: animatetop;
+  -webkit-animation-duration: 0.4s;
+  animation-name: animatetop;
+  animation-duration: 0.4s
+}
+.close-btn {
+  float: right; 
+  color: lightgray; 
+  font-size: 24px;  
+  font-weight: bold;
+}
+.close-btn:hover {
+  color: darkgray;
+}
+@-webkit-keyframes animatetop {
+  from {top:-300px; opacity:0} 
+  to {top:0; opacity:1}
+}
+@keyframes animatetop {
+  from {top:-300px; opacity:0}
+  to {top:0; opacity:1}
 }
