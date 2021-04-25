@@ -247,7 +247,7 @@ function daysInMonth(month, year) {
   return new Date(year, month, 0).getDate();
 }
 
-// --- modal
+// --- modal - about
 let modalBtn = document.getElementById("About_nav");
 let modal = document.querySelector(".modal");
 let closeBtn = document.querySelector(".close-btn");
