@@ -90,52 +90,121 @@
     </div>
 
     <div id="Register_content" class="content" style="display: none">
-      <p>Register</p>
+      <div class="container-form">
+        <form>
+          <div class="container">
+            <h1>Register</h1>
+
+            <div class="inline">
+              <div class="above">
+                <label for="uname"><b>Username</b></label>
+                <input type="text" placeholder="Enter Username" name="uname" />
+              </div>
+
+              <div class="above">
+                <label for="fullname"><b>Full Name</b></label>
+                <input
+                  type="text"
+                  placeholder="Enter full name"
+                  name="fullname"
+                />
+              </div>
+            </div>
+            <div class="inline">
+              <div class="above">
+                <label for="email"><b>Email</b></label>
+                <input type="text" placeholder="Enter email" name="email" />
+              </div>
+
+              <div class="above">
+                <label for="psw"><b>Password</b></label>
+                <input
+                  type="password"
+                  placeholder="Enter Password"
+                  name="psw"
+                />
+              </div>
+            </div>
+
+            <div class="above">
+              <label for="birthday"><b>Date Of Birth</b></label>
+              <div class="inline">
+                <select id="days" required></select>
+                <select id="months" required></select>
+                <select id="years" required></select>
+              </div>
+            </div>
+
+            <div class="inline button">
+              <button type="submit">Register</button>
+              <button type="reset">Reset</button>
+            </div>
+          </div>
+        </form>
+      </div>
     </div>
 
     <div id="Login_content" class="content" style="display: none">
       <div class="container-form">
-        <form method="post">
+        <form>
           <div class="container">
             <h1>Login</h1>
 
             <div class="imgcontainer">
               <img src="./assets/loginIcon.png" alt="Avatar" class="avatar" />
             </div>
-
             <label for="uname"><b>Username</b></label>
             <input
               type="text"
               placeholder="Enter Username"
               name="uname"
+              id="login_username"
+              name="login_username"
               required
+              autofocus
             />
-
             <label for="psw"><b>Password</b></label>
             <input
               type="password"
               placeholder="Enter Password"
               name="psw"
+              id="login_password"
+              name="login_password"
               required
+              autofocus
             />
+            <div class="alert alert-warning" id="alert_login" role="alert">
+              <strong>Warning<br /></strong>
+              <span id="alert_details_login"></span>
+            </div>
 
-            <button type="submit">Login</button>
+            <button id="sign_in_btn" type="button">Login</button>
           </div>
         </form>
       </div>
     </div>
 
-    <div id="Game_content" class="content" style="display: none">
-      <div id="score">
+    <div id="Game_content" class="content content-game" style="display: none">
+      <div id="score" class="above" style="margin: 0%; padding: 0%; width: 10%">
         <label for="lblScore">SCORE:</label>
-        <input id="lblScore" type="text" />
+        <input
+          id="lblScore"
+          type="text"
+          style="width: 90%; text-align: center"
+        />
       </div>
-      <div id="time">
+
+      <div id="game" class="game-container">
+        <canvas id="canvas"></canvas>
+      </div>
+
+      <div id="time" class="above" style="margin: 0%; padding: 0%; width: 10%">
         <label for="lblTime">TIME:</label>
-        <input id="lblTime" type="text" />
-      </div>
-      <div id="game">
-        <canvas id="canvas" height="600" width="600"></canvas>
+        <input
+          id="lblTime"
+          type="text"
+          style="width: 90%; text-align: center"
+        />
       </div>
     </div>
 
