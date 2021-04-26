@@ -88,6 +88,7 @@
         <button id="Play_btn" type="button">Play</button>
       </div>
     </div>
+
     <!-- Register Content -->
     <div id="Register_content" class="content" style="display: none">
       <div class="container-form">
@@ -224,68 +225,195 @@
     <!-- Game Settings -->
     <div id="Settings_content" class="content" style="display: none">
       <div class="container-form">
-        <form>
+        <form class="setting-form">
           <div class="container">
-            <h1>Game Settings</h1>
-            <div class="inline">
-              <div class="above">
-                <label for="ball_numbers"
-                  ><b>Number of balls [50-90 balls]</b></label
-                >
-                <input
-                  class="form-control"
-                  id="ball_numbers"
-                  max="90"
-                  min="50"
-                  name="name_balls"
-                  pattern="\d+"
-                  type="number"
-                  value="50"
-                  required
-                  autofocus
-                />
-              </div>
+            <h3>Game Settings</h3>
+            <div class="game-props-row">
+              <div class="game-props-col prop-prop">
+                <div><u>Properties</u></div>
 
-              <div class="above">
-                <label for="ghost_numbers">Number of ghost [1-4 ghosts]</label>
-                <input
-                  class="form-control"
-                  id="ghost_numbers"
-                  max="4"
-                  min="1"
-                  name="name_ghosts"
-                  pattern="\d+"
-                  placeholder=""
-                  required
-                  type="number"
-                  value="2"
-                  required
-                  autofocus
-                />
+                <div class="inline-props">
+                  <p><b>Balls [50-90]</b></p>
+                  <input
+                    class="form-control"
+                    id="ball_numbers"
+                    max="90"
+                    min="50"
+                    width="2%"
+                    name="name_balls"
+                    pattern="\d+"
+                    type="number"
+                    value="50"
+                    required
+                    autofocus
+                  />
+                </div>
+                <div class="inline-props">
+                  <p>Ghosts [1-4]</p>
+                  <input
+                    class="form-control"
+                    id="ghost_numbers"
+                    max="4"
+                    min="1"
+                    name="name_ghosts"
+                    pattern="\d+"
+                    placeholder=""
+                    required
+                    type="number"
+                    value="2"
+                    required
+                    autofocus
+                  />
+                </div>
+                <div class="inline-props">
+                  <p>Game time [60-600 sec]</p>
+                  <input
+                    class="form-control"
+                    id="game_time"
+                    max="600"
+                    min="60"
+                    name="name_time"
+                    pattern="\d+"
+                    placeholder=""
+                    required
+                    type="number"
+                    value="60"
+                    required
+                    autofocus
+                  />
+                </div>
               </div>
-              <div class="above">
-                <label for="game_time">Game time [60-600 sec]</label>
-                <input
-                  class="form-control"
-                  id="game_time"
-                  max="600"
-                  min="60"
-                  name="name_time"
-                  pattern="\d+"
-                  placeholder=""
-                  required
-                  type="number"
-                  value="60"
-                  required
-                  autofocus
-                />
-              </div>
-            </div>
-            <div class="inline">
-              <div class="above">
-                <div>Choose keys got movement:</div>
+              <div class="game-props-col prop-keys">
+                <div><u>Game Keys</u></div>
                 <!-- need to create class and adjust-->
-                <div class="btn_up">
+                <div class="btn_up inline-props">
+                  <p>Up</p>
+                  <input
+                    type="text"
+                    id="btn_keyup"
+                    value="ArrowUp"
+                    style="color: black"
+                    readonly
+                  />
+                </div>
+                <!-- need to create class and adjust-->
+                <div class="btn_left inline-props">
+                  <p>Left</p>
+                  <input
+                    type="text"
+                    id="btn_keyleft"
+                    value="ArrowLeft"
+                    style="color: black"
+                    readonly
+                  />
+                </div>
+                <!-- need to create class and adjust-->
+                <div class="btn_down inline-props">
+                  <p>Down</p>
+                  <input
+                    type="text"
+                    id="btn_keydown"
+                    value="ArrowDown"
+                    style="color: black"
+                    readonly
+                  />
+                </div>
+                <!-- need to create class and adjust-->
+                <div class="btn_right inline-props">
+                  <p>Right</p>
+                  <input
+                    type="text"
+                    size="8"
+                    id="btn_keyright"
+                    value="ArrowRight"
+                    style="color: black"
+                    readonly
+                  />
+                </div>
+              </div>
+              <div class="game-props-col">
+                <div><u>Balls Colors</u></div>
+                <!-- need to create class and adjust-->
+                <div class="point5 inline-props">
+                  <label>5 point</label>
+                  <label for="5points"></label
+                  ><input class="color" id="5points" required type="color" />
+                </div>
+                <div class="point15 inline-props">
+                  <label>15 point</label>
+                  <label for="15points"></label
+                  ><input class="color" id="15points" required type="color" />
+                </div>
+                <div class="point25 inline-props">
+                  <label>25 point</label>
+                  <label for="25points"></label
+                  ><input class="color" id="25points" required type="color" />
+                </div>
+              </div>
+              </div>
+              <!-- 
+              <div class="inline game-setting">
+                <div class="above">
+                  <label for="ball_numbers"
+                    ><b>Number of balls [50-90 balls]</b></label
+                  >
+                  <input
+                    class="form-control"
+                    id="ball_numbers"
+                    max="90"
+                    min="50"
+                    name="name_balls"
+                    pattern="\d+"
+                    type="number"
+                    value="50"
+                    required
+                    autofocus
+                  />
+                </div>
+
+                <div class="above">
+                  <label for="ghost_numbers"
+                    >Number of ghost [1-4 ghosts]</label
+                  >
+                  <input
+                    class="form-control"
+                    id="ghost_numbers"
+                    max="4"
+                    min="1"
+                    name="name_ghosts"
+                    pattern="\d+"
+                    placeholder=""
+                    required
+                    type="number"
+                    value="2"
+                    required
+                    autofocus
+                  />
+                </div>
+                <div class="above">
+                  <label for="game_time">Game time [60-600 sec]</label>
+                  <input
+                    class="form-control"
+                    id="game_time"
+                    max="600"
+                    min="60"
+                    name="name_time"
+                    pattern="\d+"
+                    placeholder=""
+                    required
+                    type="number"
+                    value="60"
+                    required
+                    autofocus
+                  />
+                </div>
+              </div>
+              <div>Choose keys got movement:</div>
+              <div class="inline">
+              -->
+              <!-- need to create class and adjust-->
+              <!--
+                <div class="btn_up above">
                   <p>Up</p>
                   <input
                     type="text"
@@ -295,9 +423,7 @@
                     readonly
                   />
                 </div>
-                </div>
-                <!-- need to create class and adjust-->
-                <div class="btn_left">
+                <div class="btn_left above">
                   <p>Left</p>
                   <input
                     type="text"
@@ -308,8 +434,7 @@
                     readonly
                   />
                 </div>
-                <!-- need to create class and adjust-->
-                <div class="btn_down">
+                <div class="btn_down above">
                   <p>Down</p>
                   <input
                     type="text"
@@ -319,8 +444,7 @@
                     readonly
                   />
                 </div>
-                <!-- need to create class and adjust-->
-                <div class="btn_right">
+                <div class="btn_right above">
                   <p>Right</p>
                   <input
                     type="text"
@@ -330,10 +454,9 @@
                     readonly
                   />
                 </div>
-              </div>
-
+                -->
+              <!--
               <div class="above">
-                <!-- need to create class and adjust-->
                 <div class="point5">
                   <label>5 point</label>
                   <label for="5points"></label
@@ -350,11 +473,11 @@
                   ><input class="color" id="25points" required type="color" />
                 </div>
               </div>
-            </div>
-
-            <div class="inline button">
-              <button id="start_play" type="button">Start!</button>
-              <button id="random" type="button">Random</button>
+              -->
+              <div class="inline button">
+                <button id="start_play" type="button">Start!</button>
+                <button id="random" type="button">Random</button>
+              </div>
             </div>
           </div>
         </form>
