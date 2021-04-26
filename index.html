@@ -2,16 +2,28 @@
 <html>
   <head>
     <meta charset="UTF-8" />
-	<meta name="authors" content="Tom Nachman and Asaf Salomon">
-	<meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
-	<title>PACMAN</title>
-	<!--Links -->
-	<link rel="shortcut icon" type="image/png" href="assets/pacmanIcon.png"/>
-	<link rel="stylesheet" type="text/css" href="./styles/style.css" />
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300">
-	<!-- Scripts -->
-	<script  type="text/javascript" src="./scripts/jquery-3.4.1.slim.min.js"></script>
+    <meta name="authors" content="Tom Nachman and Asaf Salomon" />
+    <meta
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+      name="viewport"
+    />
+    <title>PACMAN</title>
+    <!--Links -->
+    <link rel="shortcut icon" type="image/png" href="assets/pacmanIcon.png" />
+    <link rel="stylesheet" type="text/css" href="./styles/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Roboto:300"
+    />
+    <!-- Scripts -->
+    <script
+      type="text/javascript"
+      src="./scripts/jquery-3.4.1.slim.min.js"
+    ></script>
   </head>
 
   <body>
@@ -53,7 +65,7 @@
             >
           </li>
           <li id="About_nav">
-            <a href="#" 
+            <a href="#"
               ><i class="fas fa-address-card"></i> <span> About</span></a
             >
           </li>
@@ -61,7 +73,7 @@
       </div>
     </div>
 
-    <!--Content -->
+    <!-- Welcome Content -->
     <div id="Welcome_content" class="content">
       <div class="container">
         <h1>welcome</h1>
@@ -69,14 +81,14 @@
           id="welcome_gif"
           src="assets/PacmanMoving.gif"
           alt="wlgif"
-          style="width: 23%"
+          style="width: 40vmin"
         />
         <button id="Login_btn" type="button">Login</button>
         <button id="Register_btn" type="button">Register</button>
         <button id="Play_btn" type="button">Play</button>
       </div>
     </div>
-
+    <!-- Register Content -->
     <div id="Register_content" class="content" style="display: none">
       <div class="container-form">
         <form>
@@ -86,36 +98,50 @@
             <div class="inline">
               <div class="above">
                 <label for="uname"><b>Username</b></label>
-                <input id="register_username" type="text" placeholder="Enter Username" name="uname" required autofocus />
+                <input
+                  id="register_username"
+                  type="text"
+                  placeholder="Enter Username"
+                  name="uname"
+                  required
+                  autofocus
+                />
               </div>
 
               <div class="above">
                 <label for="firstname"><b>First Name</b></label>
                 <input
-				  id="register_firstname"
+                  id="register_firstname"
                   type="text"
                   placeholder="Enter first name"
                   name="firstname"
-				  required
-				  autofocus
+                  required
+                  autofocus
                 />
               </div>
-			  <div class="above">
+              <div class="above">
                 <label for="lastname"><b>Last Name</b></label>
                 <input
-				  id="register_lastname"
+                  id="register_lastname"
                   type="text"
                   placeholder="Enter last name"
                   name="lastname"
-				  required
-				  autofocus
+                  required
+                  autofocus
                 />
               </div>
             </div>
             <div class="inline">
               <div class="above">
                 <label for="email"><b>Email</b></label>
-                <input id="register_email" type="text" placeholder="Enter email" name="email" required autofocus/>
+                <input
+                  id="register_email"
+                  type="text"
+                  placeholder="Enter email"
+                  name="email"
+                  required
+                  autofocus
+                />
               </div>
 
               <div class="above">
@@ -124,9 +150,9 @@
                   type="password"
                   placeholder="Enter Password"
                   name="psw"
-				  id="register_password"
-				  required
-				  autofocus
+                  id="register_password"
+                  required
+                  autofocus
                 />
               </div>
             </div>
@@ -140,10 +166,10 @@
               </div>
             </div>
 
-			<div class="alert" id="alert_register" role="alert">
-				<strong>Warning<br /></strong>
-				<span id="alert_details_register"></span>
-			</div>
+            <div class="alert" id="alert_register" role="alert">
+              <strong>Warning<br /></strong>
+              <span id="alert_details_register"></span>
+            </div>
 
             <div class="inline button">
               <button id="submit_register" type="button">Register</button>
@@ -154,9 +180,10 @@
       </div>
     </div>
 
+    <!-- Login Content -->
     <div id="Login_content" class="content" style="display: none">
       <div class="container-form">
-        <form>
+        <form id="login_form">
           <div class="container">
             <h1>Login</h1>
 
@@ -167,7 +194,6 @@
             <input
               type="text"
               placeholder="Enter Username"
-
               name="uname"
               id="login_username"
               name="login_username"
@@ -195,6 +221,147 @@
       </div>
     </div>
 
+    <!-- Game Settings -->
+    <div id="Settings_content" class="content" style="display: none">
+      <div class="container-form">
+        <form>
+          <div class="container">
+            <h1>Game Settings</h1>
+            <div class="inline">
+              <div class="above">
+                <label for="ball_numbers"
+                  ><b>Number of balls [50-90 balls]</b></label
+                >
+                <input
+                  class="form-control"
+                  id="ball_numbers"
+                  max="90"
+                  min="50"
+                  name="name_balls"
+                  pattern="\d+"
+                  type="number"
+                  value="50"
+                  required
+                  autofocus
+                />
+              </div>
+
+              <div class="above">
+                <label for="ghost_numbers">Number of ghost [1-4 ghosts]</label>
+                <input
+                  class="form-control"
+                  id="ghost_numbers"
+                  max="4"
+                  min="1"
+                  name="name_ghosts"
+                  pattern="\d+"
+                  placeholder=""
+                  required
+                  type="number"
+                  value="2"
+                  required
+                  autofocus
+                />
+              </div>
+              <div class="above">
+                <label for="game_time">Game time [60-600 sec]</label>
+                <input
+                  class="form-control"
+                  id="game_time"
+                  max="600"
+                  min="60"
+                  name="name_time"
+                  pattern="\d+"
+                  placeholder=""
+                  required
+                  type="number"
+                  value="60"
+                  required
+                  autofocus
+                />
+              </div>
+            </div>
+            <div class="inline">
+              <div class="above">
+                <div>Choose keys got movement:</div>
+                <!-- need to create class and adjust-->
+                <div class="btn_up">
+                  <p>Up</p>
+                  <input
+                    type="text"
+                    size="8"
+                    id="btn_keyup"
+                    style="color: black"
+                    readonly
+                  />
+                </div>
+                </div>
+                <!-- need to create class and adjust-->
+                <div class="btn_left">
+                  <p>Left</p>
+                  <input
+                    type="text"
+                    size="8"
+                    id="btn_keyleft"
+                    style="color: black"
+                    placeholder="ArrowDown"
+                    readonly
+                  />
+                </div>
+                <!-- need to create class and adjust-->
+                <div class="btn_down">
+                  <p>Down</p>
+                  <input
+                    type="text"
+                    size="8"
+                    id="btn_keydown"
+                    style="color: black"
+                    readonly
+                  />
+                </div>
+                <!-- need to create class and adjust-->
+                <div class="btn_right">
+                  <p>Right</p>
+                  <input
+                    type="text"
+                    size="8"
+                    id="btn_keyright"
+                    style="color: black"
+                    readonly
+                  />
+                </div>
+              </div>
+
+              <div class="above">
+                <!-- need to create class and adjust-->
+                <div class="point5">
+                  <label>5 point</label>
+                  <label for="5points"></label
+                  ><input class="color" id="5points" required type="color" />
+                </div>
+                <div class="point15">
+                  <label>15 point</label>
+                  <label for="15points"></label
+                  ><input class="color" id="15points" required type="color" />
+                </div>
+                <div class="point25">
+                  <label>25 point</label>
+                  <label for="25points"></label
+                  ><input class="color" id="25points" required type="color" />
+                </div>
+              </div>
+            </div>
+
+            <div class="inline button">
+              <button id="start_play" type="button">Start!</button>
+              <button id="random" type="button">Random</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Game Content -->
     <div id="Game_content" class="content content-game" style="display: none">
       <div id="score" class="above" style="margin: 0%; padding: 0%; width: 10%">
         <label for="lblScore">SCORE:</label>
@@ -206,7 +373,7 @@
       </div>
 
       <div id="game" class="game-container">
-        <canvas id="canvas"></canvas>
+        <canvas id="canvas" width="550" height="550"></canvas>
       </div>
 
       <div id="time" class="above" style="margin: 0%; padding: 0%; width: 10%">
@@ -218,18 +385,19 @@
         />
       </div>
     </div>
-	<!-- About Modal -->
-	<div id ="About_modal" class="modal">
-		<div class="modal-header">
-		  <span class="close-btn">&times;</span>
-		</div>
-		<div class="modal-content">
-		  <p>this is the text inside the modal</p>
-		</div>
-		<!--<div class="modal-footer">
+
+    <!-- About Modal -->
+    <div id="About_modal" class="modal">
+      <div class="modal-header">
+        <span class="close-btn">&times;</span>
+      </div>
+      <div class="modal-content">
+        <p>this is the text inside the modal</p>
+      </div>
+      <!--<div class="modal-footer">
 		  <h2>I am the Footer</h2>
 		</div> -->
-	</div>
+    </div>
     <!-- Footer -->
     <footer>
       <p>Web Development Enviourmnets</p>
@@ -241,5 +409,6 @@
 
     <script type="text/javascript" src="./scripts/app.js"></script>
     <script type="text/javascript" src="./scripts/menu.js"></script>
+    <script type="text/javascript" src="./scripts/settings.js"></script>
   </body>
 </html>

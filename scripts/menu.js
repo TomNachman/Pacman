@@ -6,6 +6,7 @@ $(document).ready(function(){
   $("#Logout_nav").hide();
   $("#Welcome_content").show();
   $("#Game_content").hide();
+  $("#Settings_content").hide();
   $("#Play_btn").hide();
   $("#Play_nav").hide();
   $("#Logout_nav").hide();
@@ -13,7 +14,6 @@ $(document).ready(function(){
   $("#Register_content").hide();
   $("#alert_login").hide();
   $("#alert_register").hide();
-  //$("#About_modal").hide();
   // init first user
   const first_uesr = {
     firstname : "Pac",
@@ -44,7 +44,8 @@ $(document).ready(function(){
     users.forEach(user => {
       if(user.username === username && user.password === password){
         active_user = user;
-        valid = true;   
+        valid = true;
+        logged_user = true;   
       }
     });
     if (!logged_user){
@@ -193,12 +194,16 @@ $("#Logout_nav, #Logout_btn").click(function() {
   $("#Register_nav").show();
   $("#Register_btn").show();
   $("#Logout_nav").hide();
+  $('#login_form')[0].reset();
 });
 
 $("#Play_btn, #Play_nav").click(function(){
   console.log("Play");
   hide_everyhing();
-  $("#Game_content").show();
+  $("#Settings_content").show();
+  $("#5points").val("#FFFFFF");
+  $("#15points").val("#7495E0");
+  $("#25points").val("#E34C27");
 });
 
 function hide_everyhing() {
@@ -206,6 +211,7 @@ function hide_everyhing() {
   $("#Game_content").hide();
   $("#Login_content").hide();
   $("#Register_content").hide();
+  $("#Settings_content").hide();
   //$("#About_modal").hide();
 };
 
@@ -263,3 +269,7 @@ window.onclick = function(e){
     modal.style.display = "none"
   }
 }
+document.addEventListener('keydown', function (e) {
+  if (e.code == 'Escape')
+      modal.style.display = 'none';
+});

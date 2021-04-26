@@ -3,9 +3,12 @@ var shape = new Object();
 var board;
 var score;
 var pac_color;
-var start_time;
+var start_time, gametime;
 var time_elapsed;
 var interval;
+var movements = {up: 1, down: 2, left: 3, right: 4};
+var ghosts_num ,balls_num;
+var point5C,point15C,point25C;
 
 $(document).ready(function() {
 	context = canvas.getContext("2d");
@@ -58,14 +61,14 @@ function Start() {
 	addEventListener(
 		"keydown",
 		function(e) {
-			keysDown[e.keyCode] = true;
+			keysDown[e.code] = true;
 		},
 		false
 	);
 	addEventListener(
 		"keyup",
 		function(e) {
-			keysDown[e.keyCode] = false;
+			keysDown[e.code] = false;
 		},
 		false
 	);
@@ -83,16 +86,16 @@ function findRandomEmptyCell(board) {
 }
 
 function GetKeyPressed() {
-	if (keysDown[38]) {
+	if (keysDown[key_up]) {
 		return 1;
 	}
-	if (keysDown[40]) {
+	if (keysDown[key_down]) {
 		return 2;
 	}
-	if (keysDown[37]) {
+	if (keysDown[key_left]) {
 		return 3;
 	}
-	if (keysDown[39]) {
+	if (keysDown[key_right]) {
 		return 4;
 	}
 }
@@ -104,8 +107,8 @@ function Draw() {
 	for (var i = 0; i < 10; i++) {
 		for (var j = 0; j < 10; j++) {
 			var center = new Object();
-			center.x = i * 60 + 30;
-			center.y = j * 60 + 30;
+			center.x = i * 55 + 30;
+			center.y = j * 55 + 30;
 			if (board[i][j] == 2) {
 				context.beginPath();
 				context.arc(center.x, center.y, 30, 0.15 * Math.PI, 1.85 * Math.PI); // half circle
@@ -123,7 +126,7 @@ function Draw() {
 				context.fill();
 			} else if (board[i][j] == 4) {
 				context.beginPath();
-				context.rect(center.x - 30, center.y - 30, 60, 60);
+				context.rect(center.x - 25, center.y - 30, 60, 60);
 				context.fillStyle = "grey"; //color
 				context.fill();
 			}
