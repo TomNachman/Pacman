@@ -267,14 +267,9 @@ footer {
 }
 
 #canvas {
-<<<<<<< HEAD
-  width: 70vmin;
-  height: 70vmin;
-=======
   height: 70vmin;
   width: 70vmin;
   /* border: 1px solid rgb(34, 255, 0); */
->>>>>>> 56fbd9427c9548d3cf78213af88814b27668d8f1
 }
 
 
