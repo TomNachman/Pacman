@@ -34,8 +34,8 @@ $("#start_play").click(function(){
     point5C = $("#5points").val();
     point15C = $("#15points").val();
     point25C = $("#25points").val();
-    $("#Settings_content").hide();
-    $("#Game_content").show();
+    //$("#Settings_content").hide();
+    //$("#Game_content").show();
     // Start_Game();
 });
 
@@ -48,8 +48,13 @@ $("#random").click(function(){
         $("#15points").val("#" + ((1<<24)*Math.random() | 0).toString(16));
         $("#25points").val("#" + ((1<<24)*Math.random() | 0).toString(16));
     }while($("#5points").val() == $("#15points").val() == $("#25points").val() );
-    
-    alert("Random Settings Generated!");
+
+    $("#btn_keyleft").val('ArrowLeft') ,key_left = 'ArrowLeft';
+    $("#btn_keyright").val('ArrowRight') ,key_left = 'ArrowRight';
+    $("#btn_keyup").val('ArrowUp') ,key_left = 'ArrowUp';
+    $("#btn_keydown").val('ArrowDown') ,key_left = 'ArrowDown';
+
+    alert("Random Settings Generated! \n ArrowKeys are your play keys");
     
 });
 function randomNumber(min, max) { 
