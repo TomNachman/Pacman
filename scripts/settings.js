@@ -1,9 +1,6 @@
 /* --- Game Setting --- */
 
 var key_left,key_right,key_down,key_up;
-var ghosts_num = 2,balls_num = 50, gametime =60;
-var point5C,point15C,point25C;
-
 
   /* -detects keys-  */
 document.getElementById("btn_keyup").onkeydown = function (key) {
@@ -34,9 +31,13 @@ $("#start_play").click(function(){
     point5C = $("#5points").val();
     point15C = $("#15points").val();
     point25C = $("#25points").val();
-    //$("#Settings_content").hide();
-    //$("#Game_content").show();
-    // Start_Game();
+    key_up = $("#btn_keyup").val();
+    key_down = $("#btn_keydown").val();
+    key_left = $("#btn_keyleft").val();
+    key_right = $("#btn_keyright").val();
+    $("#Settings_content").hide();
+    $("#Game_content").show();
+    Start();
 });
 
 $("#random").click(function(){
@@ -49,12 +50,10 @@ $("#random").click(function(){
         $("#25points").val("#" + ((1<<24)*Math.random() | 0).toString(16));
     }while($("#5points").val() == $("#15points").val() == $("#25points").val() );
 
-    $("#btn_keyleft").val('ArrowLeft') ,key_left = 'ArrowLeft';
-    $("#btn_keyright").val('ArrowRight') ,key_left = 'ArrowRight';
-    $("#btn_keyup").val('ArrowUp') ,key_left = 'ArrowUp';
-    $("#btn_keydown").val('ArrowDown') ,key_left = 'ArrowDown';
-
-    
+    $("#btn_keyleft").val('ArrowLeft');
+    $("#btn_keyright").val('ArrowRight');
+    $("#btn_keyup").val('ArrowUp');
+    $("#btn_keydown").val('ArrowDown');
 });
 function randomNumber(min, max) { 
     return Math.floor(Math.random() * (max - min) + min);

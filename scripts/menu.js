@@ -44,7 +44,8 @@ $(document).ready(function(){
     users.forEach(user => {
       if(user.username === username && user.password === password){
         active_user = user;
-        valid = true;   
+        valid = true;
+        logged_user = true;   
       }
     });
     if (!logged_user){
@@ -193,6 +194,7 @@ $("#Logout_nav, #Logout_btn").click(function() {
   $("#Register_nav").show();
   $("#Register_btn").show();
   $("#Logout_nav").hide();
+  $('#login_form')[0].reset();
 });
 
 $("#Play_btn, #Play_nav").click(function(){
@@ -267,3 +269,7 @@ window.onclick = function(e){
     modal.style.display = "none"
   }
 }
+document.addEventListener('keydown', function (e) {
+  if (e.code == 'Escape')
+      modal.style.display = 'none';
+});

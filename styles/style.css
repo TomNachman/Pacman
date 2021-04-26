@@ -282,8 +282,8 @@ footer {
 }
 
 #canvas {
-  width: 70vmin;
   height: 70vmin;
+  width: 70vmin;
 }
 
 /* Modal - about */
