@@ -6,6 +6,7 @@ $(document).ready(function(){
   $("#Logout_nav").hide();
   $("#Welcome_content").show();
   $("#Game_content").hide();
+  $("#Settings_content").hide();
   $("#Play_btn").hide();
   $("#Play_nav").hide();
   $("#Logout_nav").hide();
@@ -66,7 +67,6 @@ $(document).ready(function(){
      $("#Logout_nav").show();
     }
   });
-
 });
 
 // -------- Content change 
@@ -198,7 +198,10 @@ $("#Logout_nav, #Logout_btn").click(function() {
 $("#Play_btn, #Play_nav").click(function(){
   console.log("Play");
   hide_everyhing();
-  $("#Game_content").show();
+  $("#Settings_content").show();
+  $("#5points").val("#FFFFFF");
+  $("#15points").val("#7495E0");
+  $("#25points").val("#E34C27");
 });
 
 function hide_everyhing() {
@@ -206,8 +209,11 @@ function hide_everyhing() {
   $("#Game_content").hide();
   $("#Login_content").hide();
   $("#Register_content").hide();
+  $("#Settings_content").hide();
+  //$("#About_modal").hide();
 };
 
+// -----date picker box
 $(function() {
 
   //populate our years select box
@@ -243,4 +249,21 @@ function updateNumberOfDays(){
 //helper function
 function daysInMonth(month, year) {
   return new Date(year, month, 0).getDate();
+}
+
+// --- modal - about
+let modalBtn = document.getElementById("About_nav");
+let modal = document.querySelector(".modal");
+let closeBtn = document.querySelector(".close-btn");
+
+modalBtn.onclick = function(){
+  modal.style.display = "block"
+};
+closeBtn.onclick = function(){
+  modal.style.display = "none"
+};
+window.onclick = function(e){
+  if(e.target == modal){
+    modal.style.display = "none"
+  }
 }

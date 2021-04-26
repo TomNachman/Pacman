@@ -123,7 +123,7 @@ function Draw() {
 				context.fill();
 			} else if (board[i][j] == 4) {
 				context.beginPath();
-				context.rect(center.x - 30, center.y - 30, 60, 60);
+				context.rect(center.x - 25, center.y - 30, 60, 60);
 				context.fillStyle = "grey"; //color
 				context.fill();
 			}
