@@ -6,6 +6,7 @@ $(document).ready(function(){
   $("#Logout_nav").hide();
   $("#Welcome_content").show();
   $("#Game_content").hide();
+  $("#Settings_content").hide();
   $("#Play_btn").hide();
   $("#Play_nav").hide();
   $("#Logout_nav").hide();
@@ -197,7 +198,10 @@ $("#Logout_nav, #Logout_btn").click(function() {
 $("#Play_btn, #Play_nav").click(function(){
   console.log("Play");
   hide_everyhing();
-  $("#Game_content").show();
+  $("#Settings_content").show();
+  $("#5points").val("#FFFFFF");
+  $("#15points").val("#7495E0");
+  $("#25points").val("#E34C27");
 });
 
 function hide_everyhing() {
@@ -205,6 +209,7 @@ function hide_everyhing() {
   $("#Game_content").hide();
   $("#Login_content").hide();
   $("#Register_content").hide();
+  $("#Settings_content").hide();
   //$("#About_modal").hide();
 };
 
