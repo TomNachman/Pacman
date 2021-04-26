@@ -2,6 +2,7 @@ var users = [];
 var active_user = null;
 var logged_user = false;
 
+
 $(document).ready(function(){
   $("#Logout_nav").hide();
   $("#Welcome_content").show();
@@ -66,7 +67,8 @@ $(document).ready(function(){
      $("#Register_nav").hide();
      $("#Register_btn").hide();
      $("#Logout_nav").show();
-    }
+     $("#welcom-user").html("Welcome " + active_user.username);
+    }    
   });
 });
 
@@ -195,7 +197,11 @@ $("#Logout_nav, #Logout_btn").click(function() {
   $("#Register_btn").show();
   $("#Logout_nav").hide();
   $('#login_form')[0].reset();
+  $("#welcom-user").html("Welcom");
+
 });
+
+
 
 $("#Play_btn, #Play_nav").click(function(){
   console.log("Play");
