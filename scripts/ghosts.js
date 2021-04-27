@@ -2,7 +2,7 @@ var blue_ghost=null,pink_ghost=null,yellow_ghost = null,red_ghost=null;
 var blue_ghost_pos=null,pink_ghost_pos=null,yellow_ghost_pos = null,red_ghost_pos={};
 const dict = {
     empty: 0,
-    food: 1, //?
+    food: 1, 
     PacMan: 2,
     Walls: 4,
     balls: 5,
@@ -10,7 +10,6 @@ const dict = {
     yellow_g: 7,
     blue_g: 8,
     pink_g: 9,
-    gift: 10,
     p5: 5,
     p15: 15,
     p25: 25,
@@ -108,9 +107,9 @@ function CollisionsChecker() {
 
 
 function UpdateGhostsLocation(){
-    var red,blue,yellow,pink;
-    var ghost_pos,pos;
-    red = PathToPac(red_ghost_pos.i,red_ghost_pos.j);
+    var red,blue,yellow,pink,alpha;
+    alpha = Math.random();
+    red = (alpha <= 0.25 ) ? Explore(red_ghost_pos.i,red_ghost_pos.j) : PathToPac(red_ghost_pos.i,red_ghost_pos.j);
     //delete old location
     ghostboard[red_ghost_pos.i][red_ghost_pos.j] = 0;
     //update new location
@@ -120,21 +119,24 @@ function UpdateGhostsLocation(){
     red_ghost_pos.j = red.y;
 
     if(blue_ghost_pos!= null){
-        blue = PathToPac(blue_ghost_pos.i,blue_ghost_pos.j);
+        alphe = Math.random();
+        blue = (alpha <= 0.25 ) ? Explore(blue_ghost_pos.i,blue_ghost_pos.j) : PathToPac(blue_ghost_pos.i,blue_ghost_pos.j);
         ghostboard[blue_ghost_pos.i][blue_ghost_pos.j] = 0;
         ghostboard[blue.x][blue.y] = dict.blue_g;
         blue_ghost_pos.i = blue.x;
         blue_ghost_pos.j = blue.y;
     }
     if(yellow_ghost_pos!= null){
-        yellow = PathToPac(yellow_ghost_pos.i,yellow_ghost_pos.j);
+        alphe = Math.random();
+        yellow = (alpha <= 0.25 ) ? Explore(yellow_ghost_pos.i,yellow_ghost_pos.j) : PathToPac(yellow_ghost_pos.i,yellow_ghost_pos.j);
         ghostboard[yellow_ghost_pos.i][yellow_ghost_pos.j] = 0;
         ghostboard[yellow.x][yellow.y] = dict.yellow_g;
         yellow_ghost_pos.i = yellow.x;
         yellow_ghost_pos.j = yellow.y;
     }
     if(pink_ghost_pos!= null){
-        pink = PathToPac(pink_ghost_pos.i,pink_ghost_pos.j);
+        alphe = Math.random();
+        pink = (alpha <= 0.25 ) ? Explore(pink_ghost_pos.i,pink_ghost_pos.j) : PathToPac(pink_ghost_pos.i,pink_ghost_pos.j);
         ghostboard[pink_ghost_pos.i][pink_ghost_pos.j] = 0;
         ghostboard[pink.x][pink.y] = dict.pink_g;
         pink_ghost_pos.i = pink.x;
@@ -186,6 +188,11 @@ function isClearCell(x, y) {
     ghostboard[x][y] !== dict.yellow_g &&
     ghostboard[x][y] !== dict.pink_g &&
     ghostboard[x][y] !== dict.blue_g;
+}
+
+function Explore(x, y) {
+    var moves = getPossibleMoves(x, y);
+    return moves[Math.floor(Math.random() * moves.length)];
 }
 
 function manhattanDist(x1, y1, x2, y2) {
