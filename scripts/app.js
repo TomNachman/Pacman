@@ -15,6 +15,7 @@ var maxScore;
 var canvasWidth, canvasHeight, dynamicSize;
 var BOARD_HEIGHT = 20;
 var BOARD_WIDTH = 19;
+var pacman_remain
 
 // load images
 var wall = new Image();
@@ -42,7 +43,7 @@ function Start() {
 	console.log(food25);
 
 	console.log(maxScore);
-	var pacman_remain = 1;
+	pacman_remain = 3;
 	canvasWidth = document.getElementById("canvas").width;
     canvasHeight = document.getElementById("canvas").height;
 	start_time = new Date();
@@ -127,8 +128,10 @@ function Start() {
 
 function Draw() {
 	canvas.width = canvas.width; //clean board
-	lblScore.value = score;
-	lblTime.value = time_elapsed;
+	$("#lblScore").html(score);
+	$("#lblTime").html(time_elapsed);
+	var hearts = '&#10084;'.repeat(pacman_remain);
+	$("#lblHealth").html(hearts);
 	for (var i = 0; i < BOARD_HEIGHT; i++) {
 		for (var j = 0; j < BOARD_WIDTH; j++) {
 			var center = new Object();
@@ -210,6 +213,7 @@ function UpdatePosition() {
 	
 	if(board[shape.i][shape.j] == 5){
 		score += 5;
+		pacman_remain--;
 	}
 
 	if(board[shape.i][shape.j] == 15){
@@ -229,6 +233,10 @@ function UpdatePosition() {
 	if (score == maxScore) {
 		window.clearInterval(interval);
 		window.alert("Game completed");
+	}
+	else if (pacman_remain==0){
+		window.clearInterval(interval);
+		window.alert("You Lose");
 	} else {
 		Draw();
 	}
