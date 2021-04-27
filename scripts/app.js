@@ -6,7 +6,7 @@ var pac_color;
 var start_time, gametime;
 var time_elapsed;
 var interval;
-var movements = {up: 1, down: 2, left: 3, right: 4};
+//var movements = {up: 1, down: 2, left: 3, right: 4};
 var ghosts_num ,balls_num;
 var point5C,point15C,point25C;
 var pos=0.15;
@@ -46,64 +46,14 @@ function Start() {
 	canvasWidth = document.getElementById("canvas").width;
     canvasHeight = document.getElementById("canvas").height;
 	start_time = new Date();
-	/*
-	for (var i = 0; i < 10; i++) {
-		board[i] = new Array();
-		//put obstacles in (i=3,j=3) and (i=3,j=4) and (i=3,j=5), (i=6,j=1) and (i=6,j=2)
-		for (var j = 0; j < 10; j++) {
-			if (
-				(i == 3 && j == 3) ||
-				(i == 3 && j == 4) ||
-				(i == 3 && j == 5) ||
-				(i == 6 && j == 1) ||
-				(i == 6 && j == 2)
-			) {
-				board[i][j] = 4;
-			} else {
-				var randomNum = Math.random();
-				if (randomNum <= food_remain / cnt) {
-					if(randomNum <= food5 / food_remain){
-						food5--
-						board[i][j] = 5;
-					}
-					else if( (food5 / food_remain) < randomNum <= (food15 / food_remain)){
-						food15--
-						board[i][j] = 15;
-					}
-					else if( (food15 / food_remain) < randomNum <= (food25 / food_remain)){
-						food25--
-						board[i][j] = 25;
-					}
-					food_remain--;
-					//board[i][j] = 1;
-				} else if (randomNum < (1.0 * (pacman_remain + food_remain)) / cnt) {
-					shape.i = i;
-					shape.j = j;
-					pacman_remain--;
-					board[i][j] = 2;
-				} else {
-					board[i][j] = 0;
-				}
-				cnt--;
-			}
-		}
-	}*/
 	
 	for (var i = 0; i < BOARD_HEIGHT; i++) {
         board[i] = [];
         ghostboard[i] = [];
-        // for (var j = 0; j < BOARD_WIDTH; j++) {
-        //     board[i][j] = 0;
-        //     ghostboard[i][j] = 0;
-        // }
     }
 	setBoards();	
 	setGhosts();
-	//set pacman
-	board[10][9] = 2;
-	shape.i = 10;
-	shape.j = 9;
-	//set food
+	putPacMan();
 	setFood(food5,food15,food25);
 
 	keysDown = {};
@@ -170,7 +120,6 @@ function Draw() {
 			}
 			// Ghosts
 			
-			//if (i== 19 && j == 19 )console.log("hi");
 			if (ghostboard[i][j] === dict.red_g)
 				DrawGhost(center.x, center.y, "red");
             else if (ghostboard[i][j] === dict.yellow_g)
@@ -210,14 +159,17 @@ function UpdatePosition() {
 	
 	if(board[shape.i][shape.j] == 5){
 		score += 5;
+		//eat.play();
 	}
 
 	if(board[shape.i][shape.j] == 15){
 		score += 15;
+		//eat.play();
 	}
 
 	if(board[shape.i][shape.j] == 25){
 		score += 25;
+		//eat.play();
 	}
 
 	board[shape.i][shape.j] = 2;
@@ -230,6 +182,7 @@ function UpdatePosition() {
 		window.clearInterval(interval);
 		window.alert("Game completed");
 	} else {
+		UpdateGhostsLocation();
 		Draw();
 	}
 }
@@ -288,6 +241,7 @@ function putBalls(x_center, y_center, value){
 	if (value == 25) context.fillText("25", x_center - 5 , y_center + 3);
 	context.fill();
 };
+
 function setFood(food5,food15,food25){
 	while (food5 > 0) {
 		var emptyCell = findRandomEmptyCell(board);
@@ -308,3 +262,19 @@ function setFood(food5,food15,food25){
 	} 
 }
 
+function putPacMan() {
+    var emptyCell;
+    var redDist = 0, blueDist = 0, pinkDist = 0, yellowDist = 0;
+
+    while (redDist < 3 || blueDist < 3 || pinkDist < 3 || yellowDist < 3) {
+        emptyCell = findRandomEmptyCell(board);
+        redDist = manhattanDist(0, 0, emptyCell[0], emptyCell[1] );
+		blueDist = (ghosts_num > 1) ? manhattanDist(0, BOARD_WIDTH-1 , emptyCell[0], emptyCell[1] ) : 4 ;
+        yellowDist = (ghosts_num > 2) ? manhattanDist( BOARD_HEIGHT - 1, 0 , emptyCell[0], emptyCell[1] ) : 4 ;
+        pinkDist = (ghosts_num > 3) ? manhattanDist( BOARD_HEIGHT - 1, BOARD_WIDTH-1 , emptyCell[0], emptyCell[1] ) : 4 ;
+    }
+
+    board[emptyCell[0]][emptyCell[1]] = dict.PacMan;
+    shape.i = emptyCell[0];
+    shape.j = emptyCell[1];
+}
