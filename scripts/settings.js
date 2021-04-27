@@ -35,6 +35,17 @@ $("#start_play").click(function(){
     key_down = $("#btn_keydown").val();
     key_left = $("#btn_keyleft").val();
     key_right = $("#btn_keyright").val();
+
+    $("#setting-balls").html(balls_num);
+    $("#setting-ghosts").html(ghosts_num);
+    $("#setting-time").html(gametime);
+    $("#setting-up").html(key_up);
+    $("#setting-down").html(key_down);
+    $("#setting-left").html( key_left);
+    $("#setting-right").html(key_right);
+    $("#setting-5-color").val(point5C);
+    $("#setting-15-color").val(point15C);
+    $("#setting-25-color").val(point25C);
     $("#Settings_content").hide();
     $("#Game_content").show();
     Start();
