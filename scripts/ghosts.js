@@ -29,16 +29,16 @@ function DrawGhost(x,y,color){
     //ghost_img.src = "assets/ghosts/" + color + "_ghost.gif";
     switch (color) {
         case "red":
-            context.drawImage(ghost_img_red,x + 2,y,0.7 * (canvasWidth / 20),0.7 * (canvasHeight / 20));
+            context.drawImage(ghost_img_red, x - 17 , y - 20 ,0.7 * (canvasWidth / 20),0.7 * (canvasHeight / 20));
             break;
         case "blue":
-            context.drawImage(ghost_img_blue,x + 2,y,0.7 * (canvasWidth / 20),0.7 * (canvasHeight / 20));
+            context.drawImage(ghost_img_blue,x - 17 , y - 20,0.7 * (canvasWidth / 20),0.7 * (canvasHeight / 20));
             break;
         case "yellow":
-            context.drawImage(ghost_img_yellow,x + 2,y,0.7 * (canvasWidth / 20),0.7 * (canvasHeight / 20));
+            context.drawImage(ghost_img_yellow,x - 17 , y - 20,y,0.7 * (canvasWidth / 20),0.7 * (canvasHeight / 20));
             break;
         case "pink":
-            context.drawImage(ghost_img_pink,x + 2,y,0.7 * (canvasWidth / 20),0.7 * (canvasHeight / 20));
+            context.drawImage(ghost_img_pink,x - 17 , y - 20,0.7 * (canvasWidth / 20),0.7 * (canvasHeight / 20));
             break;
     }
 }

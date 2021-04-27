@@ -34,9 +34,14 @@ function Start() {
 	var cnt = 100;
 	var food_remain = balls_num? balls_num : 50 ;
 	var food5 = Math.floor(food_remain*0.6);
-	var food15 = Math.floor(food_remain*0.2);
+	var food15 = Math.floor(food_remain*0.3);
 	var food25 = Math.floor(food_remain*0.1);
 	maxScore = food5 * 5 + food15 * 15 + food25 * 25
+	console.log(food5);
+	console.log(food15);
+	console.log(food25);
+
+	console.log(maxScore);
 	var pacman_remain = 1;
 	canvasWidth = document.getElementById("canvas").width;
     canvasHeight = document.getElementById("canvas").height;
@@ -87,18 +92,18 @@ function Start() {
 	for (var i = 0; i < BOARD_HEIGHT; i++) {
         board[i] = [];
         ghostboard[i] = [];
-        for (var j = 0; j < BOARD_WIDTH; j++) {
-            board[i][j] = 0;
-            ghostboard[i][j] = 0;
-        }
+        // for (var j = 0; j < BOARD_WIDTH; j++) {
+        //     board[i][j] = 0;
+        //     ghostboard[i][j] = 0;
+        // }
     }
 	setBoards();	
 	setGhosts();
 	//set pacman
 	board[10][9] = 2;
+	shape.i = 10;
+	shape.j = 9;
 	//set food
-	setFood(food5,food15,food25);
-	
 	setFood(food5,food15,food25);
 
 	keysDown = {};
@@ -117,7 +122,7 @@ function Start() {
 		false
 	);
 	Draw();
-	//interval = setInterval(UpdatePosition, 250);
+	interval = setInterval(UpdatePosition, 250);
 }
 
 function Draw() {
@@ -133,7 +138,7 @@ function Draw() {
 			// Pacman
 			if (board[i][j] == 2) {
 				context.beginPath();
-				context.arc(center.x, center.y, 30, pos * Math.PI, (pos + 1.7) * Math.PI); // half circle
+				context.arc(center.x, center.y, 25, pos * Math.PI, (pos + 1.7) * Math.PI); // half circle
 				context.lineTo(center.x, center.y);
 				context.fillStyle = pac_color; //color
 				context.fill();
@@ -165,7 +170,7 @@ function Draw() {
 			}
 			// Ghosts
 			
-			if (i== 19 && j == 19 )console.log("hi");
+			//if (i== 19 && j == 19 )console.log("hi");
 			if (ghostboard[i][j] === dict.red_g)
 				DrawGhost(center.x, center.y, "red");
             else if (ghostboard[i][j] === dict.yellow_g)
@@ -188,7 +193,7 @@ function UpdatePosition() {
 		}
 	}
 	if (x == 2) {
-		if (shape.j < 9 && board[shape.i][shape.j + 1] != 4) {
+		if (shape.j < BOARD_WIDTH - 1 && board[shape.i][shape.j + 1] != 4) {
 			shape.j++;
 		}
 	}
@@ -198,7 +203,7 @@ function UpdatePosition() {
 		}
 	}
 	if (x == 4) {
-		if (shape.i < 9 && board[shape.i + 1][shape.j] != 4) {
+		if (shape.i < BOARD_HEIGHT - 1 && board[shape.i + 1][shape.j] != 4) {
 			shape.i++;
 		}
 	}
