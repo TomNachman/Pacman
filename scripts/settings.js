@@ -141,6 +141,7 @@ const deepCopyFunction = (inObject) => {
     }
     return outObject;
 }
+
 function checkIfDuplicateExists(){
     var tmp = [key_up,key_down,key_left,key_right];
     return new Set(tmp).size !== tmp.length    

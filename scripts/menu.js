@@ -2,7 +2,6 @@ var users = [];
 var active_user = null;
 var logged_user = false;
 
-
 $(document).ready(function(){
   $("#Logout_nav").hide();
   $("#Welcome_content").show();
@@ -88,9 +87,10 @@ $("#Register_nav, #Register_btn").click(function() {
   console.log("Register");
   hide_everyhing();
   $("#Register_content").show();
-  
+
 });
 $("#submit_register").click(function(){
+  
   console.log("register");
   var valid = true;
   var username = $('#register_username').val();
@@ -281,3 +281,29 @@ document.addEventListener('keydown', function (e) {
   if (e.code == 'Escape')
       modal.style.display = 'none';
 });
+
+
+
+// $("#login_form").validate({
+//   // Specify validation rules
+//   rules: {
+//     login_username: {
+//       required: true,
+//     },
+//     login_password: {
+//       required: true,
+//     }
+//   },
+//   messages: {
+//     login_username: {
+//       required: "Username is  asdasdasdasda"
+//     },
+//     login_password: {
+//       required: "Password Username is messing.",
+//     }
+//   },
+//   submitHandler: function () {
+//     let form = $("#contact_form_login");
+//     form[0].reset();
+//   }
+// });
