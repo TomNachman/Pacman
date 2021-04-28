@@ -6,6 +6,7 @@ var pac_color;
 var start_time, gametime;
 var time_elapsed;
 var interval, intervalGhosts;
+
 //var movements = {up: 1, down: 2, left: 3, right: 4};
 var ghosts_num ,balls_num, balls_eaten=0;
 var point5C,point15C,point25C;
@@ -24,7 +25,7 @@ var optional_speed = [450,350,300,250]
 var die = new Audio('./assets/sounds/die.mp3');
 var ready = new Audio('./assets/sounds/ready.mp3');
 var eat = new Audio('./assets/sounds/eat-pill.mp3');
-var waka = new Audio('./assets/sounds/waka-waka.mp3');
+var pacmusic = new Audio('./assets/sounds/pacmusic.mp3');
 
 // load images
 var wall_image = new Image(60, 45);

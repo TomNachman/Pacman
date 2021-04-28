@@ -139,6 +139,7 @@ const deepCopyFunction = (inObject) => {
       outObject[key] = deepCopyFunction(value);
     }
     return outObject;
+}
 
 function checkIfDuplicateExists(){
     var tmp = [key_up,key_down,key_left,key_right];
