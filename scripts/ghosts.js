@@ -47,9 +47,9 @@ function clearGhosts(){
         red_ghost_pos = null;
     }
         
-    if(pink_ghost_pos != null){
+    if(blue_ghost_pos != null){
         ghostboard[blue_ghost_pos.i][blue_ghost_pos.j] = 0;
-        pink_ghost_pos = null;
+        blue_ghost_pos = null;
     }
     if(yellow_ghost_pos != null){
         ghostboard[yellow_ghost_pos.i][yellow_ghost_pos.j] = 0;
