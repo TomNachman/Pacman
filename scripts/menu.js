@@ -79,22 +79,23 @@ $(document).ready(function(){
 $("#Welcome_nav").click(function(){
   hide_everyhing();
   $("#Welcome_content").show();
+  StopBackMusic();
 });
 // -- login
 $("#Login_nav, #Login_btn").click(function() {
     hide_everyhing();
     $("#Login_content").show();
+    StopBackMusic();
 });
 // -- register
 $("#Register_nav, #Register_btn").click(function() {
-  console.log("Register");
   hide_everyhing();
   $("#Register_content").show();
+  StopBackMusic();
 
 });
 $("#submit_register").click(function(){
   
-  console.log("register");
   var valid = true;
   var username = $('#register_username').val();
   var firstname = $('#register_firstname').val();
@@ -102,7 +103,6 @@ $("#submit_register").click(function(){
   var email = $('#register_email').val();
   var password = $('#register_password').val();
   var birthday = $('#days').val() + '/' + $('#months').val() + '/' + $('#years').val();
-  console.log(birthday);
   var msg = "";
   $("#alert_details_register").empty();
   $("#alert_register").hide();
@@ -203,18 +203,19 @@ $("#Logout_nav, #Logout_btn").click(function() {
   $("#Logout_nav").hide();
   $('#login_form')[0].reset();
   $("#welcom-user").html("Welcom");
+  StopBackMusic();
 
 });
 
 
 
 $("#Play_btn, #Play_nav, #btn_new_game").click(function(){
-  console.log("Play");
   hide_everyhing();
   $("#Settings_content").show();
   $("#5points").val("#FFFFFF");
   $("#15points").val("#7495E0");
   $("#25points").val("#E34C27");
+  StopBackMusic();
 });
 
 function hide_everyhing() {

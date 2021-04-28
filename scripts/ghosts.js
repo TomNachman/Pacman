@@ -1,8 +1,8 @@
 var blue_ghost=null,pink_ghost=null,yellow_ghost = null,red_ghost=null;
-var blue_ghost_pos=null,pink_ghost_pos=null,yellow_ghost_pos = null,red_ghost_pos=null;
+var blue_ghost_pos=null,pink_ghost_pos=null,yellow_ghost_pos = null, red_ghost_pos=null, cookie_pos=null;
 const dict = {
     empty: 0,
-    food: 1, 
+    cookie: 1, 
     PacMan: 2,
     addTimer: 3,
     Walls: 4,
@@ -24,6 +24,8 @@ var ghost_img_yellow = new Image();
 ghost_img_yellow.src = "assets/ghosts/yellow_ghost.gif"
 var ghost_img_pink = new Image();
 ghost_img_pink.src = "assets/ghosts/pink_ghost.gif"
+var cookie = new Image();
+cookie.src = "assets/cookie.png"
 
 function DrawGhost(x,y,color){
     switch (color) {
@@ -63,7 +65,7 @@ function clearGhosts(){
 }
 
 
-function setGhosts() {
+function setGhostsAndCookie() {
     //init red ghost
     if(ghosts_num >= 1){
         red_ghost_pos = {};
@@ -92,6 +94,11 @@ function setGhosts() {
         pink_ghost_pos.i = BOARD_HEIGHT - 1;
         pink_ghost_pos.j = BOARD_WIDTH - 1;
     }
+    //init cookie
+    cookie_pos = {}
+    ghostboard[10][8] = dict.cookie;
+    cookie_pos.i = 10;
+    cookie_pos.j = 8;
 }
 
 function CollisionsChecker() {
@@ -99,7 +106,6 @@ function CollisionsChecker() {
         red_ghost_pos.i === shape.i &&
         red_ghost_pos.j === shape.j
     ) {
-        //EndGame();
         return true;
     }
 
@@ -108,7 +114,6 @@ function CollisionsChecker() {
         blue_ghost_pos.i === shape.i &&
         blue_ghost_pos.j === shape.j
     ) {
-        //EndGame();;
         return true;
     }
 
@@ -117,7 +122,6 @@ function CollisionsChecker() {
         pink_ghost_pos.i === shape.i &&
         pink_ghost_pos.j === shape.j
     ) {
-        //EndGame();
         return true;
     }
 
@@ -126,12 +130,19 @@ function CollisionsChecker() {
         yellow_ghost_pos.i === shape.i &&
         yellow_ghost_pos.j === shape.j
     ) {
-        //EndGame();
         return true;
     }
 }
 
-
+function updateCookieLocation(){
+    if(!cookie_eaten){
+        var cookie_new = Explore(cookie_pos.i,cookie_pos.j);
+        ghostboard[cookie_pos.i][cookie_pos.j] = 0;
+        ghostboard[cookie_new.x][cookie_new.y] = dict.cookie;
+        cookie_pos.i = cookie_new.x;
+        cookie_pos.j = cookie_new.y;
+    } else ghostboard[cookie_pos.i][cookie_pos.j] = 0;
+}
 function UpdateGhostsLocation(){
     var red,blue,yellow,pink,alpha;
     alpha = Math.random();
@@ -197,7 +208,8 @@ function isClearCell(x, y) {
     ghostboard[x][y] !== dict.red_g &&
     ghostboard[x][y] !== dict.yellow_g &&
     ghostboard[x][y] !== dict.pink_g &&
-    ghostboard[x][y] !== dict.blue_g;
+    ghostboard[x][y] !== dict.blue_g &&
+    ghostboard[x][y] !== dict.cookie;
 }
 
 function Explore(x, y) {
