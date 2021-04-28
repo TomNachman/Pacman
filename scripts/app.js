@@ -8,19 +8,16 @@ var time_elapsed;
 var interval, intervalGhosts, intervalCookie;
 var cookie_eaten = false;
 
-//var movements = {up: 1, down: 2, left: 3, right: 4};
 var ghosts_num ,balls_num, balls_eaten=0;
 var point5C,point15C,point25C;
 var pos=0.15;
 var maxScore;
 var ghosts_speed
-// --- new ver vars
 var canvasWidth, canvasHeight, dynamicSize;
 var BOARD_HEIGHT = 20;
 var BOARD_WIDTH = 19;
 var pacman_remain = 5;
 var optional_speed = [450,350,300,250]
-
 
 // load sounds
 var die = new Audio('./assets/sounds/die.mp3');
@@ -30,15 +27,18 @@ var pacmusic = new Audio('./assets/sounds/pacmusic.mp3');
 // load images
 var wall_image = new Image(60, 45);
 wall_image.src = "./assets/wall.png";
+var addTimerIcon = new Image();
+addTimerIcon.src = "./assets/gameIcons/timerAdd.png";
 
 $(document).ready(function() {
 	context = canvas.getContext("2d");
 });
 
+// Start a new game from strach
 function Start() {
 	board = [];
 	ghostboard = [];
-	pac_color = "yellow";
+	pac_color = "#FFFF00";
 	var cnt = 100;
 	var food_remain = balls_num? balls_num : 50 ;
 	var food5 = Math.floor(food_remain*0.6);
@@ -59,6 +59,7 @@ function Start() {
 	setGhostsAndCookie();
 	putPacMan();
 	setFood(food5,food15,food25);
+	setBonusTimer();
 
 	keysDown = {};
 	addEventListener(
@@ -82,6 +83,7 @@ function Start() {
 	interval = setInterval(UpdatePosition, 250);
 }
 
+// Draw a current position
 function Draw() {
 	canvas.width = canvas.width; //clean board
 	$("#lblScore").html(score);
@@ -105,7 +107,7 @@ function Draw() {
 			// Pacman
 			if (board[i][j] == 2) {
 				context.beginPath();
-				context.arc(center.x, center.y, 25, pos * Math.PI, (pos + 1.7) * Math.PI); // half circle
+				context.arc(center.x, center.y, 30, pos * Math.PI, (pos + 1.7) * Math.PI); // half circle
 				context.lineTo(center.x, center.y);
 				context.fillStyle = pac_color; //color
 				context.fill();
@@ -124,8 +126,7 @@ function Draw() {
 				context.fillStyle = "grey"; //color
 				context.fill();
 				context.drawImage(wall_image, center.x - 23, center.y -25, 55, 55);
-				//context.drawImage(wall,center.x,center.y,30,30);
-				//context.drawImage(ghost_img_yellow,center.x + 2,center.y,0.7 * (canvasWidth / 20),0.7 * (canvasHeight / 20));
+				
 			// Balls
 			} else if (board[i][j] == 5) {
 				putBalls(center.x, center.y, 5);	
@@ -136,6 +137,12 @@ function Draw() {
 			} else if (board[i][j] == 25) {
 				putBalls(center.x, center.y, 25);
 			}
+		
+			// Timer Bonus
+			else if(board[i][j] == 3 && (gametime-time_elapsed) < 55){
+			 	context.drawImage(addTimerIcon, center.x - 17 , center.y - 20 ,0.7 * (canvasWidth / 20),0.7 * (canvasHeight / 20));
+			}
+
 			// Ghosts
 			if (ghostboard[i][j] === dict.red_g)
 				DrawGhost(center.x, center.y, "red");
@@ -148,19 +155,14 @@ function Draw() {
 			// Cookie
 			if (ghostboard[i][j] === dict.cookie)
 				context.drawImage(cookie, center.x-17, center.y -20,0.7 * (canvasWidth / 20),0.7 * (canvasHeight / 20));
-				
 		}
 	}
 }
 
+// update the ghosts positions
 function UpdateGhostsPosition(){
 	if(CollisionsChecker()){
-		pacman_remain--;
-		score -= 10;
-		clearGhosts();
-		setGhosts();
-		putPacMan();
-		Draw();
+		collission();
 	}
 
 	if (pacman_remain==0){
@@ -175,6 +177,7 @@ function UpdateGhostsPosition(){
 	}
 }
 
+// update the pacman position
 function UpdatePosition() {
 	board[shape.i][shape.j] = 0;
 	var x = GetKeyPressed();
@@ -209,7 +212,6 @@ function UpdatePosition() {
 			pacmusic.volume = 1; 
 			}, 500)
 	}
-
 	if(board[shape.i][shape.j] == 15){
 		score += 15;
 		balls_eaten++;
@@ -219,7 +221,6 @@ function UpdatePosition() {
 			pacmusic.volume = 1; 
 			}, 500)
 	}
-
 	if(board[shape.i][shape.j] == 25){
 		score += 25;
 		balls_eaten++;
@@ -230,11 +231,17 @@ function UpdatePosition() {
 			}, 500)
 	}
 
+	// Time base position (time bunos)
+	if(board[shape.i][shape.j] == 3 && (gametime-time_elapsed)<55){
+		gametime = +gametime + 30;
+	}
+
+	// fixed the pacman position
 	board[shape.i][shape.j] = 2;
 	var currentTime = new Date();
 	time_elapsed = (currentTime - start_time) / 1000;
 	
-	if (score >= 20 && time_elapsed <= 10) {
+	if (score >= 100 && time_elapsed <= 10) {
 		pac_color = "green";
 	}
 
@@ -251,34 +258,22 @@ function UpdatePosition() {
 			}, 500)
 		cookie_eaten = true;
 	}
-	
-	if(CollisionsChecker()){
-		pacmusic.volume = 0.1;
-		die.play();
-		setTimeout(function(){ 
-			pacmusic.volume = 1; 
-		}, 1000)
-		pacman_remain--;
-		score -= 10;
-		clearGhosts();
-		setGhosts();
-		putPacMan();
-		Draw();
-	}
-	
-	if (pacman_remain==0){
+
+	if(CollisionsChecker())
+		collission();
+
+  if (pacman_remain==0){
 		finish("fault");
-	}
 
 	if(time_elapsed>gametime){
 		finish("time");
 	}
-
 	else {
 		Draw();
 	}
 }
 
+// game is over (msg - reason)
 function finish(msg){
 	window.clearInterval(interval);
 	window.clearInterval(intervalGhosts);
@@ -292,6 +287,7 @@ function finish(msg){
 	StopBackMusic();
 }
 
+// finding an empty cell randomly
 function findRandomEmptyCell(board) {
 	var i = Math.floor(Math.random() * (BOARD_HEIGHT-1)+1);
 	var j = Math.floor(Math.random() * (BOARD_WIDTH-1)+1);
@@ -302,6 +298,7 @@ function findRandomEmptyCell(board) {
 	return [i, j];
 }
 
+// get the key pressed and fixing pacman's eating position
 function GetKeyPressed() {
 	if (keysDown[key_up]) {
 		pos=1.65
@@ -321,6 +318,7 @@ function GetKeyPressed() {
 	}
 }
 
+// put a ball in a given position
 function putBalls(x_center, y_center, value){
 	context.beginPath();
 	if (value == 5) context.fillStyle = point5C;
@@ -339,6 +337,13 @@ function putBalls(x_center, y_center, value){
 	context.fill();
 };
 
+// locationg the timer bonus on the board
+function setBonusTimer(){
+	var emptyCell = findRandomEmptyCell(board);
+	board[emptyCell[0]][emptyCell[1]] = dict.addTimer;
+}
+
+// locationg the food (balls) on the board
 function setFood(food5,food15,food25){
 	while (food5 > 0) {
 		var emptyCell = findRandomEmptyCell(board);
@@ -359,6 +364,7 @@ function setFood(food5,food15,food25){
 	} 
 }
 
+// locating the pacman on the board
 function putPacMan() {
     var emptyCell;
     var redDist = 0, blueDist = 0, pinkDist = 0, yellowDist = 0;
@@ -379,8 +385,27 @@ function putPacMan() {
     shape.i = emptyCell[0];
     shape.j = emptyCell[1];
 }
+
+ // retarting the game, clean the values
  function RestartGame(){
 	window.clearInterval(interval);
+	window.clearInterval(intervalGhosts);
 	pacman_remain = 5;
-	$("#game_time").val(60)
+	gametime=0;
+	$("#game_time").val(1);
+ }
+
+ // handle with collision between the pacman and the ghosts
+ function collission(){
+  pacmusic.volume = 0.1;
+	die.play();
+	setTimeout(function(){ 
+		pacmusic.volume = 1; 
+	}, 1000)
+	pacman_remain--;
+	score -= 10;
+	clearGhosts();
+	setGhosts();
+	putPacMan();
+	Draw();
  }

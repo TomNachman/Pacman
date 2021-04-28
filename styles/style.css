@@ -14,8 +14,19 @@ body {
 
 body {
   font-family: "MyWebFont", sans-serif;
-  background: url("https://www.classicgaming.cc/classics/pac-man/images/web/seamless-background-pac-man-chalk-pattern-yellow.jpg")
-    scroll;
+}
+
+body::after {
+  content: "";
+  background: url("https://www.classicgaming.cc/classics/pac-man/images/web/seamless-background-pac-man-chalk-pattern-blue.jpg")
+  scroll;
+  opacity: 0.5;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;   
 }
 
 /*Header styles */

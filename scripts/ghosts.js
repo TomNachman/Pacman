@@ -4,6 +4,7 @@ const dict = {
     empty: 0,
     cookie: 1, 
     PacMan: 2,
+    addTimer: 3,
     Walls: 4,
     balls: 5,
     red_g: 6,

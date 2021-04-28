@@ -68,6 +68,9 @@ $(document).ready(function(){
      $("#Logout_nav").show();
      $("#Settings_content").show();
      $("#welcom-user").html("Welcome " + active_user.username);
+     $("#5points").val("#FFFFFF");
+     $("#15points").val("#7495E0");
+     $("#25points").val("#E34C27");
     }    
   });
 });
