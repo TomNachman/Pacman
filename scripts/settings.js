@@ -28,6 +28,7 @@ $("#start_play").click(function(){
     balls_num = ($("#ball_numbers").val() >= 50 && $("#ball_numbers").val() <=90 ) ? $("#ball_numbers").val() : 50 ;
     gametime = ($("#game_time").val() >= 60 && $("#game_time").val() <= 600 ) ? $("#game_time").val() : 60 ;
     ghosts_num = ($("#ghost_numbers").val() >= 1 && $("#ghost_numbers").val() <= 4 ) ? $("#ghost_numbers").val() : 1 ;
+    ghosts_speed = ($("#ghost_speed").val() >= 1 && $("#ghost_speed").val() <= 4 ) ? $("#ghost_speed").val() : 2 ;
     point5C = $("#5points").val();
     point15C = $("#15points").val();
     point25C = $("#25points").val();
@@ -36,8 +37,10 @@ $("#start_play").click(function(){
     key_left = $("#btn_keyleft").val();
     key_right = $("#btn_keyright").val();
 
+    $("#setting-username").html(active_user.username)
     $("#setting-balls").html(balls_num);
     $("#setting-ghosts").html(ghosts_num);
+    $("#setting-ghosts-speed").html(ghosts_speed);
     $("#setting-time").html(gametime);
     $("#setting-up").html(key_up);
     $("#setting-down").html(key_down);
@@ -48,6 +51,13 @@ $("#start_play").click(function(){
     $("#setting-25-color").val(point25C);
     $("#Settings_content").hide();
     $("#Game_content").show();
+
+    //-- retart--
+    window.clearInterval(interval);
+    window.clearInterval(intervalGhosts);
+    pacman_remain = 5;
+    clearGhosts();
+    score = 0;
     Start();
 });
 
@@ -55,6 +65,8 @@ $("#random").click(function(){
     $("#ball_numbers").val(randomNumber(50,90));
     $("#game_time").val(randomNumber(60,600));
     $("#ghost_numbers").val(randomNumber(1,4));
+    $("#ghost_speed").val(randomNumber(1,4));
+
     do{
         $("#5points").val("#" + ((1<<24)*Math.random() | 0).toString(16));
         $("#15points").val("#" + ((1<<24)*Math.random() | 0).toString(16));
@@ -81,13 +93,13 @@ function setBoards(){
         [4, 4, 4, 4, 0, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 0, 0, 0, 4],
         [4, 0, 0, 4, 0, 0, 0, 4, 0, 0, 4, 4, 0, 0, 4, 0, 0, 0, 4],
         [4, 0, 4, 4, 0, 4, 4, 0, 0, 0, 4, 4, 0, 0, 4, 0, 0, 0, 4],
-        [4, 4, 0, 0, 0, 4, 0, 0, 0, 0, 4, 0, 0, 0, 4, 0, 4, 4, 4],
+        [4, 0, 0, 0, 0, 4, 0, 0, 0, 0, 4, 0, 0, 0, 4, 0, 4, 4, 4],
         [4, 0, 4, 0, 0, 0, 0, 4, 0, 0, 4, 0, 4, 0, 0, 0, 0, 0, 4],
         [4, 0, 4, 0, 4, 4, 0, 4, 4, 4, 4, 4, 0, 0, 0, 0, 0, 0, 4],
         [4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4],
-        [4, 0, 0, 0, 0, 4, 0, 4, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 4],
-        [4, 0, 4, 4, 0, 4, 0, 4, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 4],
-        [4, 0, 0, 4, 0, 0, 0, 4, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 4],
+        [4, 0, 0, 0, 0, 4, 0, 4, 0, 0, 4, 0, 0, 0, 4, 4, 4, 0, 4],
+        [4, 0, 4, 4, 0, 4, 0, 4, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0, 4],
+        [4, 0, 0, 4, 0, 0, 0, 4, 0, 0, 4, 0, 4, 4, 4, 0, 0, 0, 4],
         [4, 4, 0, 4, 0, 4, 0, 4, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 4],
         [0, 0, 0, 0, 0, 4, 0, 4, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 4, 4, 4, 4, 4, 4, 0, 0, 4, 4, 4, 4, 4, 4, 4, 0, 0],
