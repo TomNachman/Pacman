@@ -1,5 +1,5 @@
 var blue_ghost=null,pink_ghost=null,yellow_ghost = null,red_ghost=null;
-var blue_ghost_pos=null,pink_ghost_pos=null,yellow_ghost_pos = null,red_ghost_pos={};
+var blue_ghost_pos=null,pink_ghost_pos=null,yellow_ghost_pos = null,red_ghost_pos=null;
 const dict = {
     empty: 0,
     food: 1, 
@@ -40,11 +40,36 @@ function DrawGhost(x,y,color){
             break;
     }
 }
+
+function clearGhosts(){
+    if(red_ghost_pos != null){
+        ghostboard[red_ghost_pos.i][red_ghost_pos.j] = 0;
+        red_ghost_pos = null;
+    }
+        
+    if(blue_ghost_pos != null){
+        ghostboard[blue_ghost_pos.i][blue_ghost_pos.j] = 0;
+        blue_ghost_pos = null;
+    }
+    if(yellow_ghost_pos != null){
+        ghostboard[yellow_ghost_pos.i][yellow_ghost_pos.j] = 0;
+        yellow_ghost_pos = null;
+    }
+    if(pink_ghost_pos != null){
+        ghostboard[pink_ghost_pos.i][pink_ghost_pos.j] = 0; 
+        pink_ghost_pos = null;       
+    }
+}
+
+
 function setGhosts() {
     //init red ghost
-    ghostboard[0][0] = dict.red_g;
-    red_ghost_pos.i = 0;
-    red_ghost_pos.j = 0;
+    if(ghosts_num >= 1){
+        red_ghost_pos = {};
+        ghostboard[0][0] = dict.red_g;
+        red_ghost_pos.i = 0;
+        red_ghost_pos.j = 0;
+    }
     //init blue ghost
     if(ghosts_num >= 2){
         blue_ghost_pos = {};
@@ -63,8 +88,8 @@ function setGhosts() {
     if(ghosts_num >= 4){
         pink_ghost_pos = {};
         ghostboard[BOARD_HEIGHT - 1][BOARD_WIDTH-1] = dict.pink_g;
-        blue_ghost_pos.i = BOARD_HEIGHT - 1;
-        blue_ghost_pos.j = BOARD_WIDTH - 1;
+        pink_ghost_pos.i = BOARD_HEIGHT - 1;
+        pink_ghost_pos.j = BOARD_WIDTH - 1;
     }
 }
 
@@ -142,22 +167,6 @@ function UpdateGhostsLocation(){
         pink_ghost_pos.i = pink.x;
         pink_ghost_pos.j = pink.y;
     }
-    
-    // var color = ["red"];
-    // for(var i =0; i<=color.length ;i++){
-    //     ghost_pos = eval(color[i]+"_ghost_pos");
-    //     pos = PathToPac(ghost_pos.i, ghost_pos.j);
-    //     //delete old location
-    //     ghostboard[ghost_pos.i][ghost_pos.j] = 0;
-    //     //update new location
-    //     ghostboard[pos.x][pos.y] = dict.red_g;
-    //     //update ghost params
-    //     ghost_pos.i = red.x;
-    //     ghost_pos.j = red.y;
-        
-    // }
-    
-    
 };
 
 function PathToPac(x, y) {

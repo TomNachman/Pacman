@@ -282,6 +282,23 @@
                       autofocus
                     /></td>
                   </tr>
+                  <tr>
+                    <td>Ghosts Speed[1-4]</td>
+                    <td> <input
+                      class="form-control"
+                      id="ghost_speed"
+                      max="4"
+                      min="1"
+                      name="speed_ghosts"
+                      pattern="\d+"
+                      placeholder=""
+                      required
+                      type="number"
+                      value="2"
+                      required
+                      autofocus
+                    /></td>
+                  </tr>
                 </table>
               </div>
 
@@ -374,6 +391,10 @@
         <u>Setting:</u>
 
         <table style="width:80%; margin-top: 3%;">
+          <tr>
+            <td>Username</td>
+            <td id="setting-username"></td>
+          </tr>
 
           <tr>
             <td>Balls</td>
@@ -382,6 +403,10 @@
           <tr>
             <td>Ghosts</td>
             <td id="setting-ghosts"></td>
+          </tr>
+          <tr>
+            <td>Ghosts Speed</td>
+            <td id="setting-ghosts-speed"></td>
           </tr>
           <tr>
             <td>Time (sec)</td>
@@ -442,10 +467,18 @@
           </tr>
 
           <tr>
-            <td>Time</td>
+            <td>Time Left</td>
             <td id="lblTime"> </td>
           </tr>   
-        </table>    
+
+          <tr>
+            <td>Balls Left</td>
+            <td id="lblBallsLeft"> </td>
+          </tr>  
+        </table>   
+        <button id="btn_new_game" style="width: 70%;">
+          Start new game
+        </button> 
       </div>
     </div>
 
