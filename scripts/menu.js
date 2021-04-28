@@ -204,7 +204,6 @@ $("#Logout_nav, #Logout_btn").click(function() {
   $('#login_form')[0].reset();
   $("#welcom-user").html("Welcom");
   StopBackMusic();
-
 });
 
 
@@ -215,6 +214,17 @@ $("#Play_btn, #Play_nav, #btn_new_game").click(function(){
   $("#5points").val("#FFFFFF");
   $("#15points").val("#7495E0");
   $("#25points").val("#E34C27");
+  $("#ball_numbers").val(50);
+  $("#game_time").val(60);
+  $("#ghost_numbers").val(2);
+  $("#ghost_speed").val(2);
+  $("#btn_keyleft").val('ArrowLeft');
+  $("#btn_keyright").val('ArrowRight');
+  $("#btn_keyup").val('ArrowUp');
+  $("#btn_keydown").val('ArrowDown');
+  pacmusic.volume = 0;
+  die.volume = 0;
+  eat.volume = 0;
   StopBackMusic();
 });
 

@@ -23,6 +23,7 @@ var optional_speed = [450,350,300,250]
 var die = new Audio('./assets/sounds/die.mp3');
 var eat = new Audio('./assets/sounds/eat-pill.mp3');
 var pacmusic = new Audio('./assets/sounds/pacmusic.mp3');
+pacmusic.loop = true;
 
 // load images
 var wall_image = new Image(60, 45);
@@ -39,6 +40,9 @@ function Start() {
 	board = [];
 	ghostboard = [];
 	pac_color = "#FFFF00";
+	pacmusic.volume = 1; 
+	die.volume = 1;
+  	eat.volume = 1;
 	var cnt = 100;
 	var food_remain = balls_num? balls_num : 50 ;
 	var food5 = Math.floor(food_remain*0.6);
@@ -139,7 +143,7 @@ function Draw() {
 			}
 		
 			// Timer Bonus
-			else if(board[i][j] == 3 && (gametime-time_elapsed) < 55){
+			else if(board[i][j] == 3 && (gametime-time_elapsed) < 30){
 			 	context.drawImage(addTimerIcon, center.x - 17 , center.y - 20 ,0.7 * (canvasWidth / 20),0.7 * (canvasHeight / 20));
 			}
 
@@ -232,7 +236,7 @@ function UpdatePosition() {
 	}
 
 	// Time base position (time bunos)
-	if(board[shape.i][shape.j] == 3 && (gametime-time_elapsed)<55){
+	if(board[shape.i][shape.j] == 3 && (gametime-time_elapsed)<30){
 		gametime = +gametime + 30;
 	}
 
@@ -262,9 +266,9 @@ function UpdatePosition() {
 	if(CollisionsChecker())
 		collission();
 
-  if (pacman_remain==0){
+  	if (pacman_remain==0){
 		finish("fault");
-
+	}
 	if(time_elapsed>gametime){
 		finish("time");
 	}
@@ -386,15 +390,6 @@ function putPacMan() {
     shape.j = emptyCell[1];
 }
 
- // retarting the game, clean the values
- function RestartGame(){
-	window.clearInterval(interval);
-	window.clearInterval(intervalGhosts);
-	pacman_remain = 5;
-	gametime=0;
-	$("#game_time").val(1);
- }
-
  // handle with collision between the pacman and the ghosts
  function collission(){
   pacmusic.volume = 0.1;
@@ -405,7 +400,7 @@ function putPacMan() {
 	pacman_remain--;
 	score -= 10;
 	clearGhosts();
-	setGhosts();
+	setGhostsAndCookie();
 	putPacMan();
 	Draw();
- }
+}
