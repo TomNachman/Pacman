@@ -1,11 +1,12 @@
 /* --- Game Setting --- */
 
-var key_left,key_right,key_down,key_up;
+var key_left="ArrowLeft",key_right="ArrowRight",key_down="ArrowDown",key_up="ArrowUp";
 
   /* -detects keys-  */
 document.getElementById("btn_keyup").onkeydown = function (key) {
     document.getElementById('btn_keyup').value = key.code;
     key_up = key.code;
+    
 };
 
 document.getElementById("btn_keydown").onkeydown = function (key) {
@@ -35,6 +36,18 @@ $("#start_play").click(function(){
     key_down = $("#btn_keydown").val();
     key_left = $("#btn_keyleft").val();
     key_right = $("#btn_keyright").val();
+    var tmp = [key_up,key_down,key_left,key_right];
+    if (checkIfDuplicateExists(tmp)){
+        alert("can't assign to same keys, use the arrow keys instead");
+        $("#btn_keyleft").val('ArrowLeft');
+        key_left = $("#btn_keyleft").val();
+        $("#btn_keyright").val('ArrowRight');
+        key_right = $("#btn_keyright").val();
+        $("#btn_keyup").val('ArrowUp');
+        key_up = $("#btn_keyup").val();
+        $("#btn_keydown").val('ArrowDown');
+        key_down = $("#btn_keydown").val();
+    }
 
     $("#setting-balls").html(balls_num);
     $("#setting-ghosts").html(ghosts_num);
@@ -114,4 +127,8 @@ const deepCopyFunction = (inObject) => {
       outObject[key] = deepCopyFunction(value);
     }
     return outObject;
-  }
+}
+function checkIfDuplicateExists(){
+    var tmp = [key_up,key_down,key_left,key_right];
+    return new Set(tmp).size !== tmp.length    
+}

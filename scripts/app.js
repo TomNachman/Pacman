@@ -20,7 +20,14 @@ var pacman_remain
 // load images
 var wall = new Image();
 wall.src = "assets/wall.svg";
-// --end
+
+// load sounds
+var die = new Audio('./assets/sounds/die.mp3');
+var ready = new Audio('./assets/sounds/ready.mp3');
+var eat = new Audio('./assets/sounds/eat-pill.mp3');
+var waka = new Audio('./assets/sounds/waka-waka.mp3');
+
+
 
 $(document).ready(function() {
 	context = canvas.getContext("2d");
@@ -273,6 +280,4 @@ function putPacMan() {
 	window.clearInterval(interval);
 	pacman_remain = 3;
 	$("#game_time").val(60)
-	//$("#Game_content").hide();
-	//$("#Settings_content").show();
  }
