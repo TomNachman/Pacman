@@ -19,14 +19,19 @@ var BOARD_WIDTH = 19;
 var pacman_remain = 5;
 var optional_speed = [450,350,300,250]
 
+
+// load sounds
+var die = new Audio('./assets/sounds/die.mp3');
+var ready = new Audio('./assets/sounds/ready.mp3');
+var eat = new Audio('./assets/sounds/eat-pill.mp3');
+var waka = new Audio('./assets/sounds/waka-waka.mp3');
+
 // load images
 var wall_image = new Image(60, 45);
 wall_image.src = "./assets/wall.png";
-// --end
 
 $(document).ready(function() {
 	context = canvas.getContext("2d");
-	//Start();
 });
 
 function Start() {
@@ -39,11 +44,7 @@ function Start() {
 	var food15 = Math.floor(food_remain*0.3);
 	var food25 = Math.floor(food_remain*0.1);
 	maxScore = food5 * 5 + food15 * 15 + food25 * 25
-	console.log(food5);
-	console.log(food15);
-	console.log(food25);
-
-	console.log(maxScore);
+	pacman_remain = 3;
 	canvasWidth = document.getElementById("canvas").width;
     canvasHeight = document.getElementById("canvas").height;
 	start_time = new Date();
@@ -230,15 +231,6 @@ function UpdatePosition() {
 	}
 }
 function findRandomEmptyCell(board) {
-	/*
-	var i = Math.floor(Math.random() * 9 + 1);
-	var j = Math.floor(Math.random() * 9 + 1);
-	while (board[i][j] != 0) {
-		i = Math.floor(Math.random() * 9 + 1);
-		j = Math.floor(Math.random() * 9 + 1);
-	}
-	return [i, j];
-	*/
 	var i = Math.floor(Math.random() * (BOARD_HEIGHT-1)+1);
 	var j = Math.floor(Math.random() * (BOARD_WIDTH-1)+1);
 	while (board[i][j] != 0) { // add ghostboard[i][j] != 0 when finish
@@ -309,15 +301,20 @@ function putPacMan() {
     var emptyCell;
     var redDist = 0, blueDist = 0, pinkDist = 0, yellowDist = 0;
 
-    while (redDist < 3 || blueDist < 3 || pinkDist < 3 || yellowDist < 3) {
+    while (redDist < 4 || blueDist < 4 || pinkDist < 4 || yellowDist < 4) {
         emptyCell = findRandomEmptyCell(board);
         redDist = manhattanDist(0, 0, emptyCell[0], emptyCell[1] );
-		blueDist = (ghosts_num > 1) ? manhattanDist(0, BOARD_WIDTH-1 , emptyCell[0], emptyCell[1] ) : 4 ;
-        yellowDist = (ghosts_num > 2) ? manhattanDist( BOARD_HEIGHT - 1, 0 , emptyCell[0], emptyCell[1] ) : 4 ;
-        pinkDist = (ghosts_num > 3) ? manhattanDist( BOARD_HEIGHT - 1, BOARD_WIDTH-1 , emptyCell[0], emptyCell[1] ) : 4 ;
+		blueDist = (ghosts_num > 1) ? manhattanDist(0, BOARD_WIDTH-1 , emptyCell[0], emptyCell[1] ) : 5 ;
+        yellowDist = (ghosts_num > 2) ? manhattanDist( BOARD_HEIGHT - 1, 0 , emptyCell[0], emptyCell[1] ) : 5 ;
+        pinkDist = (ghosts_num > 3) ? manhattanDist( BOARD_HEIGHT - 1, BOARD_WIDTH-1 , emptyCell[0], emptyCell[1] ) : 5 ;
     }
 
     board[emptyCell[0]][emptyCell[1]] = dict.PacMan;
     shape.i = emptyCell[0];
     shape.j = emptyCell[1];
 }
+ function RestartGame(){
+	window.clearInterval(interval);
+	pacman_remain = 3;
+	$("#game_time").val(60)
+ }
