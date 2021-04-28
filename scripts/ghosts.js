@@ -95,10 +95,12 @@ function setGhostsAndCookie() {
         pink_ghost_pos.j = BOARD_WIDTH - 1;
     }
     //init cookie
-    cookie_pos = {}
-    ghostboard[10][8] = dict.cookie;
-    cookie_pos.i = 10;
-    cookie_pos.j = 8;
+    if(cookie_pos==null){
+        cookie_pos = {}
+        ghostboard[10][8] = dict.cookie;
+        cookie_pos.i = 10;
+        cookie_pos.j = 8;
+    }
 }
 
 function CollisionsChecker() {
