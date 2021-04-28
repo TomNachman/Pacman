@@ -5,7 +5,8 @@ var score = 0;
 var pac_color;
 var start_time, gametime;
 var time_elapsed;
-var interval, intervalGhosts;
+var interval, intervalGhosts, intervalCookie;
+var cookie_eaten = false;
 
 //var movements = {up: 1, down: 2, left: 3, right: 4};
 var ghosts_num ,balls_num, balls_eaten=0;
@@ -23,7 +24,6 @@ var optional_speed = [450,350,300,250]
 
 // load sounds
 var die = new Audio('./assets/sounds/die.mp3');
-var ready = new Audio('./assets/sounds/ready.mp3');
 var eat = new Audio('./assets/sounds/eat-pill.mp3');
 var pacmusic = new Audio('./assets/sounds/pacmusic.mp3');
 
@@ -44,6 +44,7 @@ function Start() {
 	var food5 = Math.floor(food_remain*0.6);
 	var food15 = Math.floor(food_remain*0.3);
 	var food25 = Math.floor(food_remain*0.1);
+	cookie_eaten = false;
 	maxScore = food5 * 5 + food15 * 15 + food25 * 25
 	pacman_remain = 5;
 	canvasWidth = document.getElementById("canvas").width;
@@ -55,7 +56,7 @@ function Start() {
         ghostboard[i] = [];
     }
 	setBoards();	
-	setGhosts();
+	setGhostsAndCookie();
 	putPacMan();
 	setFood(food5,food15,food25);
 
@@ -75,7 +76,9 @@ function Start() {
 		false
 	);
 	Draw();
+	pacmusic.play();
 	intervalGhosts = setInterval(UpdateGhostsLocation, optional_speed[ghosts_speed-1]);
+	intervalCookie = setInterval(updateCookieLocation,400)
 	interval = setInterval(UpdatePosition, 250);
 }
 
@@ -134,7 +137,6 @@ function Draw() {
 				putBalls(center.x, center.y, 25);
 			}
 			// Ghosts
-			
 			if (ghostboard[i][j] === dict.red_g)
 				DrawGhost(center.x, center.y, "red");
             else if (ghostboard[i][j] === dict.yellow_g)
@@ -143,6 +145,9 @@ function Draw() {
 				DrawGhost(center.x, center.y, "blue");
             else if (ghostboard[i][j] === dict.pink_g)
 				DrawGhost(center.x, center.y, "pink");
+			// Cookie
+			if (ghostboard[i][j] === dict.cookie)
+				context.drawImage(cookie, center.x-17, center.y -20,0.7 * (canvasWidth / 20),0.7 * (canvasHeight / 20));
 				
 		}
 	}
@@ -173,6 +178,7 @@ function UpdateGhostsPosition(){
 function UpdatePosition() {
 	board[shape.i][shape.j] = 0;
 	var x = GetKeyPressed();
+	//PacMan Moves
 	if (x == 1) {
 		if (shape.j > 0 && board[shape.i][shape.j - 1] != 4) {
 			shape.j--;
@@ -193,20 +199,35 @@ function UpdatePosition() {
 			shape.i++;
 		}
 	}
-	
+	//Balls eating
 	if(board[shape.i][shape.j] == 5){
 		score += 5;
 		balls_eaten++;
+		pacmusic.volume = 0.1;
+		eat.play();
+		setTimeout(function(){ 
+			pacmusic.volume = 1; 
+			}, 500)
 	}
 
 	if(board[shape.i][shape.j] == 15){
 		score += 15;
 		balls_eaten++;
+		pacmusic.volume = 0.1;
+		eat.play();
+		setTimeout(function(){ 
+			pacmusic.volume = 1; 
+			}, 500)
 	}
 
 	if(board[shape.i][shape.j] == 25){
 		score += 25;
 		balls_eaten++;
+		pacmusic.volume = 0.3;
+		eat.play();
+		setTimeout(function(){ 
+			pacmusic.volume = 1; 
+			}, 500)
 	}
 
 	board[shape.i][shape.j] = 2;
@@ -220,8 +241,23 @@ function UpdatePosition() {
 	if (score == maxScore) {
 		finish("time");
 	}
+	// cookie 
+	if (cookie_pos.i == shape.i && cookie_pos.j == shape.j && !cookie_eaten){
+		score+=50;
+		pacmusic.volume = 0.3;
+		//cookie_music.play();
+		setTimeout(function(){ 
+			pacmusic.volume = 1; 
+			}, 500)
+		cookie_eaten = true;
+	}
 	
 	if(CollisionsChecker()){
+		pacmusic.volume = 0.1;
+		die.play();
+		setTimeout(function(){ 
+			pacmusic.volume = 1; 
+		}, 1000)
 		pacman_remain--;
 		score -= 10;
 		clearGhosts();
@@ -253,6 +289,7 @@ function finish(msg){
 		case "win": alertMsg = score + ", Winner!!!"; break;
 	}
 	alert(alertMsg);
+	StopBackMusic();
 }
 
 function findRandomEmptyCell(board) {

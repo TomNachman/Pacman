@@ -69,6 +69,7 @@ $("#start_play").click(function(){
     //-- retart--
     window.clearInterval(interval);
     window.clearInterval(intervalGhosts);
+    window.clearInterval(intervalCookie);
     pacman_remain = 5;
     clearGhosts();
     score = 0;
@@ -121,8 +122,7 @@ function setBoards(){
     ];
     board = deepCopyFunction(tmp);
     ghostboard = deepCopyFunction(tmp);
-    console.log(board.length);
-    console.log(board[0].length);
+
 }
 const deepCopyFunction = (inObject) => {
     let outObject, value, key; 
@@ -147,3 +147,7 @@ function checkIfDuplicateExists(){
     return new Set(tmp).size !== tmp.length    
 }
 
+function StopBackMusic(){
+    pacmusic.pause();
+    pacmusic.currentTime = 0;
+}
