@@ -129,6 +129,10 @@ form {
   /* border: 3px solid rgb(88, 13, 59); */
 }
 
+.register{
+  width: 90vw;
+}
+
 .setting-form {
   margin: 1vmin;
   width: 90vw;
@@ -390,7 +394,7 @@ footer {
 
 #setting-in-game{
   margin-top: 1.5%;
-  height: 50vh;
+  height: 70vh;
   align-items: center;
   align-content: center;
   justify-content: center;
@@ -399,6 +403,7 @@ footer {
 
 .dynamic-table{
   margin-top: 1.5%;
+  height: 50vh;
   align-self: flex-start;
 }
 

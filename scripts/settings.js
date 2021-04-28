@@ -95,6 +95,7 @@ $("#random").click(function(){
 function randomNumber(min, max) { 
     return Math.floor(Math.random() * (max - min) + min);
 }
+
 function setBoards(){
     var tmp = [
         [0, 0, 4, 4, 4, 4, 4, 4, 0, 0, 4, 4, 4, 4, 4, 4, 4, 0, 0],

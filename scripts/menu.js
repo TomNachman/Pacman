@@ -58,7 +58,7 @@ $(document).ready(function(){
     }
     else{
      hide_everyhing();
-     $("#Welcome_content").show();
+     $("#Welcome_content").hide();
      $("#Play_btn").show();
      $("#Play_nav").show();
      $("#Login_nav").hide();
@@ -66,6 +66,7 @@ $(document).ready(function(){
      $("#Register_nav").hide();
      $("#Register_btn").hide();
      $("#Logout_nav").show();
+     $("#Settings_content").show();
      $("#welcom-user").html("Welcome " + active_user.username);
     }    
   });
@@ -222,7 +223,7 @@ function hide_everyhing() {
   //$("#About_modal").hide();
 };
 
-// -----date picker box
+// ----- date picker box ------
 $(function() {
 
   //populate our years select box

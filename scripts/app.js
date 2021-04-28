@@ -45,7 +45,7 @@ function Start() {
 	var food15 = Math.floor(food_remain*0.3);
 	var food25 = Math.floor(food_remain*0.1);
 	maxScore = food5 * 5 + food15 * 15 + food25 * 25
-	pacman_remain = 3;
+	pacman_remain = 5;
 	canvasWidth = document.getElementById("canvas").width;
     canvasHeight = document.getElementById("canvas").height;
 	start_time = new Date();
@@ -84,8 +84,15 @@ function Draw() {
 	$("#lblScore").html(score);
 	$("#lblTime").html(gametime - Math.floor(time_elapsed));
 	$("#lblBallsLeft").html(balls_num - balls_eaten);
-	var hearts = '&#10084;'.repeat(pacman_remain);
-	$("#lblHealth").html(hearts);
+	for(var i = 0; i< 5; i++){
+		if(i<pacman_remain){
+			$("#heart" + i).attr("src", "./assets/gameIcons/heart.png");
+		}
+
+		else{
+			$("#heart" + i).attr("src", "./assets/gameIcons/emptyHeart.png");
+		}
+	}
 	for (var i = 0; i < BOARD_HEIGHT; i++) {
 		for (var j = 0; j < BOARD_WIDTH; j++) {
 			var center = new Object();
@@ -147,13 +154,16 @@ function UpdateGhostsPosition(){
 		score -= 10;
 		clearGhosts();
 		setGhosts();
+		putPacMan();
 		Draw();
 	}
 
-	if (pacman_remain==0 || time_elapsed>gametime){
-		window.clearInterval(interval);
-		window.clearInterval(intervalGhosts);
-		window.alert("You Lose");
+	if (pacman_remain==0){
+		finish("fault");
+	}
+	
+	if (time_elapsed>gametime){
+		finish("time");
 	}
 	else {
 		Draw();
@@ -192,13 +202,11 @@ function UpdatePosition() {
 	if(board[shape.i][shape.j] == 15){
 		score += 15;
 		balls_eaten++;
-		//eat.play();
 	}
 
 	if(board[shape.i][shape.j] == 25){
 		score += 25;
 		balls_eaten++;
-		//eat.play();
 	}
 
 	board[shape.i][shape.j] = 2;
@@ -210,8 +218,7 @@ function UpdatePosition() {
 	}
 
 	if (score == maxScore) {
-		window.clearInterval(interval);
-		window.alert("Game completed");
+		finish("time");
 	}
 	
 	if(CollisionsChecker()){
@@ -219,18 +226,35 @@ function UpdatePosition() {
 		score -= 10;
 		clearGhosts();
 		setGhosts();
+		putPacMan();
 		Draw();
 	}
 	
-	if (pacman_remain==0 || time_elapsed>gametime){
-		window.clearInterval(interval);
-		window.clearInterval(intervalGhosts);
-		window.alert("You Lose");
+	if (pacman_remain==0){
+		finish("fault");
 	}
+
+	if(time_elapsed>gametime){
+		finish("time");
+	}
+
 	else {
 		Draw();
 	}
 }
+
+function finish(msg){
+	window.clearInterval(interval);
+	window.clearInterval(intervalGhosts);
+	var alertMsg;
+	switch(msg){
+		case "fault": alertMsg = score + ", Loser!"; break;
+		case "time": alertMsg = score < 100? "You are better than "+score+" points!" : score + ", Winner!!!"; break;
+		case "win": alertMsg = score + ", Winner!!!"; break;
+	}
+	alert(alertMsg);
+}
+
 function findRandomEmptyCell(board) {
 	var i = Math.floor(Math.random() * (BOARD_HEIGHT-1)+1);
 	var j = Math.floor(Math.random() * (BOARD_WIDTH-1)+1);
@@ -302,6 +326,10 @@ function putPacMan() {
     var emptyCell;
     var redDist = 0, blueDist = 0, pinkDist = 0, yellowDist = 0;
 
+	if(shape.i != null){
+		board[shape.i][shape.j] = 0 ;
+	}
+
     while (redDist < 4 || blueDist < 4 || pinkDist < 4 || yellowDist < 4) {
         emptyCell = findRandomEmptyCell(board);
         redDist = manhattanDist(0, 0, emptyCell[0], emptyCell[1] );
@@ -316,6 +344,6 @@ function putPacMan() {
 }
  function RestartGame(){
 	window.clearInterval(interval);
-	pacman_remain = 3;
+	pacman_remain = 5;
 	$("#game_time").val(60)
  }
