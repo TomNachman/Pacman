@@ -95,6 +95,7 @@ $("#random").click(function(){
 function randomNumber(min, max) { 
     return Math.floor(Math.random() * (max - min) + min);
 }
+
 function setBoards(){
     var tmp = [
         [0, 0, 4, 4, 4, 4, 4, 4, 0, 0, 4, 4, 4, 4, 4, 4, 4, 0, 0],
@@ -139,7 +140,7 @@ const deepCopyFunction = (inObject) => {
       outObject[key] = deepCopyFunction(value);
     }
     return outObject;
-
+}
 function checkIfDuplicateExists(){
     var tmp = [key_up,key_down,key_left,key_right];
     return new Set(tmp).size !== tmp.length    

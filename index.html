@@ -20,6 +20,7 @@
       href="https://fonts.googleapis.com/css?family=Roboto:300"
     />
     <!-- Scripts -->
+
     <script
       type="text/javascript"
       src="./scripts/jquery-3.4.1.slim.min.js"
@@ -27,6 +28,7 @@
   </head>
 
   <body>
+      
     <!-- Header -->
     <div class="header">
       <img
@@ -92,80 +94,69 @@
     <!-- Register Content -->
     <div id="Register_content" class="content" style="display: none">
       <div class="container-form">
-        <form>
+        <form class="register">
           <div class="container">
             <h1>Register</h1>
 
-            <div class="inline">
-              <div class="above">
-                <label for="uname"><b>Username</b></label>
-                <input
-                  id="register_username"
-                  type="text"
-                  placeholder="Enter Username"
-                  name="uname"
-                  required
-                  autofocus
-                />
-              </div>
-
-              <div class="above">
-                <label for="firstname"><b>First Name</b></label>
-                <input
+            <table style="width:90%; font-size: 2vmin;">
+              <tr>
+                <td>First Name</td>
+                <td><input
                   id="register_firstname"
                   type="text"
                   placeholder="Enter first name"
                   name="firstname"
+                  width="2vh"
                   required
                   autofocus
-                />
-              </div>
-              <div class="above">
-                <label for="lastname"><b>Last Name</b></label>
-                <input
+                /></td>
+                <td>Last Name</td>
+                <td><input
                   id="register_lastname"
                   type="text"
                   placeholder="Enter last name"
                   name="lastname"
                   required
                   autofocus
-                />
-              </div>
-            </div>
-            <div class="inline">
-              <div class="above">
-                <label for="email"><b>Email</b></label>
-                <input
+                /></td>
+                <td>Email</td>
+                <td><input
                   id="register_email"
                   type="text"
                   placeholder="Enter email"
                   name="email"
                   required
                   autofocus
-                />
-              </div>
-
-              <div class="above">
-                <label for="psw"><b>Password</b></label>
-                <input
+                /></td>
+              </tr>
+                            
+              <tr>
+                <td>Date Of Birth</td>
+                <td><div class="inline">
+                  <select id="days" required></select>
+                  <select id="months" required></select>
+                  <select id="years" required></select>
+                </div></td>
+                <td>username</td>
+                <td><input
+                  id="register_username"
+                  type="text"
+                  placeholder="Enter Username"
+                  name="uname"
+                  required
+                  autofocus
+                /></td>
+                <td>Password</td>
+                <td> <input
                   type="password"
                   placeholder="Enter Password"
                   name="psw"
                   id="register_password"
                   required
                   autofocus
-                />
-              </div>
-            </div>
-
-            <div class="above">
-              <label for="birthday"><b>Date Of Birth</b></label>
-              <div class="inline">
-                <select id="days" required></select>
-                <select id="months" required></select>
-                <select id="years" required></select>
-              </div>
-            </div>
+                /></td>
+              </tr>
+            </table>
 
             <div class="alert" id="alert_register" role="alert">
               <strong><u>Warning:</u><br /></strong>
@@ -458,23 +449,38 @@
         <table class="table-my" style="width:80%; margin-top: 3%;">
           <tr>
             <td>Health</td>
-            <td id="lblHealth"></td>
+            <td>
+              <div class="inline">
+                <img src="./assets/gameIcons/Heart.png" width="20"/>
+              </div>
+            </td>
+            <td id="lblHealth">
+              <img id="heart0" src="" width="15"/>
+              <img id="heart1" src="" width="15"/>
+              <img id="heart2" src="" width="15"/>
+              <img id="heart3" src="" width="15"/>
+              <img id="heart4" src="" width="15"/>
+            </td>
           </tr>  
 
           <tr>
             <td>Score</td>
+            <td><img src="./assets/gameIcons/score.png" width="20"/></td>
             <td id="lblScore"></td>
           </tr>
 
           <tr>
             <td>Time Left</td>
+            <td><img src="./assets/gameIcons/timer.png" width="20"/></td>
             <td id="lblTime"> </td>
           </tr>   
 
           <tr>
             <td>Balls Left</td>
+            <td><img src="./assets/gameIcons/Ball.ico" width="20"/></td>
             <td id="lblBallsLeft"> </td>
           </tr>  
+
         </table>   
         <button id="btn_new_game" style="width: 70%;">
           Start new game
@@ -507,9 +513,10 @@
       </p>
     </footer>
 
-    <script type="text/javascript" src="./scripts/app.js"></script>
+    
+  </body>
+  <script type="text/javascript" src="./scripts/app.js"></script>
     <script type="text/javascript" src="./scripts/menu.js"></script>
     <script type="text/javascript" src="./scripts/settings.js"></script>
-	<script type="text/javascript" src="./scripts/ghosts.js"></script>
-  </body>
+	  <script type="text/javascript" src="./scripts/ghosts.js"></script>
 </html>
