@@ -1,25 +1,27 @@
 var context;
 var shape = new Object();
 var board,ghostboard;
-var score;
+var score = 0;
 var pac_color;
 var start_time, gametime;
 var time_elapsed;
-var interval;
+var interval, intervalGhosts;
 //var movements = {up: 1, down: 2, left: 3, right: 4};
-var ghosts_num ,balls_num;
+var ghosts_num ,balls_num, balls_eaten=0;
 var point5C,point15C,point25C;
 var pos=0.15;
 var maxScore;
+var ghosts_speed
 // --- new ver vars
 var canvasWidth, canvasHeight, dynamicSize;
 var BOARD_HEIGHT = 20;
 var BOARD_WIDTH = 19;
-var pacman_remain
+var pacman_remain = 5;
+var optional_speed = [450,350,300,250]
 
 // load images
-var wall = new Image();
-wall.src = "assets/wall.svg";
+var wall_image = new Image(60, 45);
+wall_image.src = "./assets/wall.png";
 // --end
 
 $(document).ready(function() {
@@ -30,7 +32,6 @@ $(document).ready(function() {
 function Start() {
 	board = [];
 	ghostboard = [];
-	score = 0;
 	pac_color = "yellow";
 	var cnt = 100;
 	var food_remain = balls_num? balls_num : 50 ;
@@ -43,7 +44,6 @@ function Start() {
 	console.log(food25);
 
 	console.log(maxScore);
-	pacman_remain = 3;
 	canvasWidth = document.getElementById("canvas").width;
     canvasHeight = document.getElementById("canvas").height;
 	start_time = new Date();
@@ -73,13 +73,15 @@ function Start() {
 		false
 	);
 	Draw();
+	intervalGhosts = setInterval(UpdateGhostsLocation, optional_speed[ghosts_speed-1]);
 	interval = setInterval(UpdatePosition, 250);
 }
 
 function Draw() {
 	canvas.width = canvas.width; //clean board
 	$("#lblScore").html(score);
-	$("#lblTime").html(time_elapsed);
+	$("#lblTime").html(gametime - Math.floor(time_elapsed));
+	$("#lblBallsLeft").html(balls_num - balls_eaten);
 	var hearts = '&#10084;'.repeat(pacman_remain);
 	$("#lblHealth").html(hearts);
 	for (var i = 0; i < BOARD_HEIGHT; i++) {
@@ -109,6 +111,7 @@ function Draw() {
 				context.rect(center.x - 25, center.y - 30, 60, 60);
 				context.fillStyle = "grey"; //color
 				context.fill();
+				context.drawImage(wall_image, center.x - 23, center.y -25, 55, 55);
 				//context.drawImage(wall,center.x,center.y,30,30);
 				//context.drawImage(ghost_img_yellow,center.x + 2,center.y,0.7 * (canvasWidth / 20),0.7 * (canvasHeight / 20));
 			// Balls
@@ -133,6 +136,25 @@ function Draw() {
 				DrawGhost(center.x, center.y, "pink");
 				
 		}
+	}
+}
+
+function UpdateGhostsPosition(){
+	if(CollisionsChecker()){
+		pacman_remain--;
+		score -= 10;
+		clearGhosts();
+		setGhosts();
+		Draw();
+	}
+
+	if (pacman_remain==0 || time_elapsed>gametime){
+		window.clearInterval(interval);
+		window.clearInterval(intervalGhosts);
+		window.alert("You Lose");
+	}
+	else {
+		Draw();
 	}
 }
 
@@ -162,33 +184,48 @@ function UpdatePosition() {
 	
 	if(board[shape.i][shape.j] == 5){
 		score += 5;
+		balls_eaten++;
 	}
 
 	if(board[shape.i][shape.j] == 15){
 		score += 15;
+		balls_eaten++;
 		//eat.play();
 	}
 
 	if(board[shape.i][shape.j] == 25){
 		score += 25;
+		balls_eaten++;
 		//eat.play();
 	}
 
 	board[shape.i][shape.j] = 2;
 	var currentTime = new Date();
 	time_elapsed = (currentTime - start_time) / 1000;
+	
 	if (score >= 20 && time_elapsed <= 10) {
 		pac_color = "green";
 	}
+
 	if (score == maxScore) {
 		window.clearInterval(interval);
 		window.alert("Game completed");
 	}
-	else if (pacman_remain==0){
+	
+	if(CollisionsChecker()){
+		pacman_remain--;
+		score -= 10;
+		clearGhosts();
+		setGhosts();
+		Draw();
+	}
+	
+	if (pacman_remain==0 || time_elapsed>gametime){
 		window.clearInterval(interval);
+		window.clearInterval(intervalGhosts);
 		window.alert("You Lose");
-	} else {
-		UpdateGhostsLocation();
+	}
+	else {
 		Draw();
 	}
 }

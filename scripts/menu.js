@@ -203,7 +203,7 @@ $("#Logout_nav, #Logout_btn").click(function() {
 
 
 
-$("#Play_btn, #Play_nav").click(function(){
+$("#Play_btn, #Play_nav, #btn_new_game").click(function(){
   console.log("Play");
   hide_everyhing();
   $("#Settings_content").show();
