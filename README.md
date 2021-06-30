@@ -1,10 +1,6 @@
-#Assignment2: Pacman
- 
-## Authors
-Tom Nachman and Asaf Salomon
+#Pure JS Pacman Game
 
-### ID's
-204691695 , 204169155
+
 
 ### Link to git Pages
 You can click [here]() 🔗 to play Pacman.
